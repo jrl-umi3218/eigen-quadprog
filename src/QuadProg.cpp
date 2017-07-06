@@ -32,7 +32,8 @@ QuadProgCommon::QuadProgCommon():
 	X_(),
 	fail_(0),
 	iact_(),
-	iter_(2)
+	iter_(2),
+        cost_(0)
 {
 }
 
@@ -52,6 +53,11 @@ int QuadProgCommon::fail() const
 const VectorXd& QuadProgCommon::result() const
 {
 	return X_;
+}
+
+double QuadProgCommon::cost() const
+{
+  return cost_;
 }
 
 
@@ -127,7 +133,6 @@ bool QuadProgDense::solve(const MatrixXd& Q, const VectorXd& C,
 
 	int fddmat = static_cast<int>(Q_.rows());
 	int n = nrvar;
-	double crval;
 	int fdamat = static_cast<int>(A_.rows());
 	int q = nreq + nrineq;
 	int meq = nreq;
@@ -138,7 +143,7 @@ bool QuadProgDense::solve(const MatrixXd& Q, const VectorXd& C,
 	A_.block(0, 0, nrvar, nreq) = Aeq.transpose();
 	A_.block(0, nreq, nrvar, nrineq) = -Aineq.transpose();
 
-	qpgen2_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval,
+	qpgen2_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &cost_,
 		A_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(), &nact,
 		iter_.data(), work_.data(), &fail_);
 
@@ -186,7 +191,6 @@ bool QuadProgSparse::solve(const MatrixXd& Q, const VectorXd& C,
 
 	int fddmat = static_cast<int>(Q_.rows());
 	int n = nrvar;
-	double crval;
 	int fdamat = static_cast<int>(A_.rows());
 	int q = nreq + nrineq;
 	int meq = nreq;
@@ -218,7 +222,7 @@ bool QuadProgSparse::solve(const MatrixXd& Q, const VectorXd& C,
 		}
 	}
 
-	qpgen1_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval,
+	qpgen1_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &cost_,
 		A_.data(), iA_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(), &nact,
 		iter_.data(), work_.data(), &fail_);
 

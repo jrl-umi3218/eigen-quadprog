@@ -27,6 +27,8 @@ cdef extern from "<eigen-quadprog/QuadProg.h>" namespace "Eigen":
 
     const c_eigen.VectorXd& result()
 
+    double cost()
+
     bool solve(const c_eigen.MatrixXd&, const c_eigen.VectorXd&,
         const c_eigen.MatrixXd&,
         const c_eigen.VectorXd&, const c_eigen.MatrixXd&,

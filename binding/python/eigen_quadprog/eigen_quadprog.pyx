@@ -41,6 +41,8 @@ cdef class QuadProgDense(object):
     self.impl.problem(nrvar, nreq, nrineq)
   def result(self):
     return eigen.VectorXdFromC(self.impl.result())
+  def cost(self):
+    return self.impl.cost()
   def solve(self, eigen.MatrixXd Q, eigen.VectorXd C,
                   eigen.MatrixXd Aeq, eigen.VectorXd Beq,
                   eigen.MatrixXd Aineq, eigen.VectorXd Bineq,

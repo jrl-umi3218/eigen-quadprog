@@ -49,6 +49,8 @@ public:
 
 	EIGEN_QUADPROG_API void problem(int nrvar, int nreq, int nrineq);
 
+        EIGEN_QUADPROG_API double cost() const;
+
 protected:
 	void fillQCBf(int nreq, int nrineq,
 		const MatrixXd& Q, const VectorXd& C,
@@ -62,6 +64,7 @@ protected:
 	VectorXi iact_;
 	VectorXi iter_;
 	VectorXd work_;
+        double cost_;
 };
 
 
