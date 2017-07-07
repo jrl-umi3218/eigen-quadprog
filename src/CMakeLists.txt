@@ -5,7 +5,7 @@ elseif(${USE_F2C})
 endif()
 
 set(SOURCES QuadProg.cpp)
-set(HEADERS eigen_quadprog_api.h QuadProg.h)
+set(HEADERS eigen-quadprog/eigen_quadprog_api.h eigen-quadprog/QuadProg.h)
 
 set(QUAD_FORT
   QuadProg/f/solve.QP.f QuadProg/f/solve.QP.compact.f QuadProg/f/util.f

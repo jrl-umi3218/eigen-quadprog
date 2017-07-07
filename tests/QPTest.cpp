@@ -28,7 +28,7 @@
 #include <Eigen/Dense>
 
 // eigen-quadprog
-#include <QuadProg.h>
+#include <eigen-quadprog/QuadProg.h>
 
 
 struct QP1

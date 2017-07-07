@@ -14,7 +14,7 @@
 // along with EigenQP.  If not, see <http://www.gnu.org/licenses/>.
 
 // associated header
-#include "QuadProg.h"
+#include "eigen-quadprog/QuadProg.h"
 
 namespace Eigen
 {
