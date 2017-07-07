@@ -24,6 +24,9 @@ endif()
 
 setup_project()
 
+option(PYTHON_BINDING "Generate python binding." ON)
+option(PYTHON_BINDING_USER_INSTALL "Install the Python bindings in user space" OFF)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 if(UNIX)
@@ -49,6 +52,10 @@ add_definitions("-DEIGEN_QUADPROG_EXPORT")
 
 add_subdirectory(src)
 add_subdirectory(tests)
+
+if(${PYTHON_BINDING})
+  add_subdirectory(binding/python)
+endif()
 
 # Add dependency towards the library in the pkg-config file.
 pkg_config_append_libs(${PROJECT_NAME})

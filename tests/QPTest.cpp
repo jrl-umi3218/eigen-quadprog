@@ -28,7 +28,7 @@
 #include <Eigen/Dense>
 
 // eigen-quadprog
-#include <QuadProg.h>
+#include <eigen-quadprog/QuadProg.h>
 
 
 struct QP1
@@ -52,12 +52,12 @@ struct QP1
 
 
 		Aeq << 1., -1., 1., 0., 3., 1.,
-					 -1., 0., -3., -4., 5., 6.,
-					 2., 5., 3., 0., 1., 0.;
+			-1., 0., -3., -4., 5., 6.,
+			2., 5., 3., 0., 1., 0.;
 		Beq << 1., 2., 3.;
 
 		Aineq << 0., 1., 0., 1., 2., -1.,
-						 -1., 0., 2., 1., 1., 0.;
+			-1., 0., 2., 1., 1., 0.;
 		Bineq << -1., 2.5;
 
 		//with  x between ci and cs:
