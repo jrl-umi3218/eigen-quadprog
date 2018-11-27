@@ -27,14 +27,18 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
 
 if(${USE_FORTRAN_SUBDIRECTORY})
   include(CMakeAddFortranSubdirectory)
-  cmake_add_fortran_subdirectory(win_fortran
-    PROJECT win_fortran  # project name in toplevel CMakeLists.txt in lapack
-    ARCHIVE_DIR win_fortran # .lib location relative to root binary tree
-    RUNTIME_DIR win_fortran # .dll location relative to root binary tree
-    LIBRARIES win_fortran # target libraries created
+  cmake_add_fortran_subdirectory(quadprog_fortran
+    PROJECT quadprog_fortran  # project name in toplevel CMakeLists.txt in lapack
+    ARCHIVE_DIR quadprog_fortran # .lib location relative to root binary tree
+    RUNTIME_DIR quadprog_fortran # .dll location relative to root binary tree
+    LIBRARIES quadprog_fortran # target libraries created
     LINK_LIBRARIES  # link interface libraries
     NO_EXTERNAL_INSTALL)
-  target_link_libraries(${PROJECT_NAME} win_fortran)
+  target_link_libraries(${PROJECT_NAME} quadprog_fortran)
+  if(WIN32)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/quadprog_fortran/libquadprog_fortran.dll DESTINATION ${CMAKE_INSTALL_BINDIR})
+	  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/quadprog_fortran/libquadprog_fortran.lib DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  endif()
 endif()
 
 if(${USE_F2C})

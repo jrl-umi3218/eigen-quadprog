@@ -1,4 +1,4 @@
-project(win_fortran Fortran)
+project(quadprog_fortran Fortran)
 
 set(QUAD_FORT
   ../QuadProg/f/solve.QP.f
@@ -10,8 +10,8 @@ set(BLAS_FORT
   ../BLAS/f/blas.f
 )
 
-add_library(win_fortran ${QUAD_FORT} ${BLAS_FORT})
-install(TARGETS win_fortran
+add_library(quadprog_fortran ${QUAD_FORT} ${BLAS_FORT})
+install(TARGETS quadprog_fortran
     RUNTIME DESTINATION "bin"
     LIBRARY DESTINATION "lib"
     ARCHIVE DESTINATION "lib")
