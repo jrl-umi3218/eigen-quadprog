@@ -37,7 +37,7 @@ if(${USE_FORTRAN_SUBDIRECTORY})
   target_link_libraries(${PROJECT_NAME} quadprog_fortran)
   if(WIN32)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/quadprog_fortran/libquadprog_fortran.dll DESTINATION ${CMAKE_INSTALL_BINDIR})
-	  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/quadprog_fortran/libquadprog_fortran.lib DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/quadprog_fortran/libquadprog_fortran.lib DESTINATION ${CMAKE_INSTALL_LIBDIR})
   endif()
 endif()
 
