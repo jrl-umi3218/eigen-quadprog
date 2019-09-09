@@ -11,7 +11,4 @@ set(BLAS_FORT
 )
 
 add_library(quadprog_fortran ${QUAD_FORT} ${BLAS_FORT})
-install(TARGETS quadprog_fortran
-    RUNTIME DESTINATION "bin"
-    LIBRARY DESTINATION "lib"
-    ARCHIVE DESTINATION "lib")
+set_target_properties(quadprog_fortran PROPERTIES IMPORT_SUFFIX ".lib")
