@@ -29,7 +29,7 @@ add_project_dependency(Eigen3 REQUIRED)
 
 if(MSVC)
   if(USE_FORTRAN_SUBDIRECTORY)
-    set(CMAKE_MSVCIDE_RUN_PATH "\$(SolutionDir)/src/\$(Configuration);\$(SolutionDir)/src/qld_fortran")
+    set(CMAKE_MSVCIDE_RUN_PATH "\$(SolutionDir)/src/\$(Configuration);\$(SolutionDir)/src/quadprog_fortran")
   else()
     set(CMAKE_MSVCIDE_RUN_PATH "\$(SolutionDir)/src/\$(Configuration)")
   endif()
