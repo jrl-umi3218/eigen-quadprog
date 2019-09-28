@@ -9,8 +9,8 @@ set(PROJECT_DESCRIPTION "QuadProg QP solver through Eigen3 library.")
 set(PROJECT_URL "https://github.com/jorisv/RBDyn/eigen-quadprog")
 set(PROJECT_DEBUG_POSTFIX "_d")
 
-# Disable -Werror on Unix for now.
-set(CXX_DISABLE_WERROR True)
+set(CMAKE_CXX_STANDARD 11)
+set(CXX_DISABLE_WERROR True) # disable -Werror on Unix for now.
 set(DOXYGEN_USE_MATHJAX "YES")
 
 option(USE_F2C "Use f2c converted code (usually slower)." OFF)
