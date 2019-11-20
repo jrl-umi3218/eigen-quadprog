@@ -38,6 +38,12 @@ extern "C" int qpgen2_(double* dmat, double* dvec, const int* fddmat,
 
 /** Common method for Quadprog solver classes.
  *
+ * \f{align}{
+ *   \underset{{x} \in \mathbb{R}^n}{\text{minimize}} & \ \frac{1}{2}{x^TQx} + {c^Tx} \nonumber \\
+ *   \text{subject to} & \ A_{eq} x = b_{eq} \\
+ *   & \ A_{ineq} x \leq b_{ineq}
+ * \f}
+ *
  */
 class QuadProgCommon
 {
@@ -73,6 +79,12 @@ protected:
 
 
 /** Dense quadratic program.
+ *
+ * \f{align}{
+ *   \underset{{x} \in \mathbb{R}^n}{\text{minimize}} & \ \frac{1}{2}{x^TQx} + {c^Tx} \nonumber \\
+ *   \text{subject to} & \ A_{eq} x = b_{eq} \\
+ *   & \ A_{ineq} x \leq b_{ineq}
+ * \f}
  *
  */
 class QuadProgDense : public QuadProgCommon
@@ -117,6 +129,12 @@ private:
 
 
 /** Sparse quadratic program.
+ *
+ * \f{align}{
+ *   \underset{{x} \in \mathbb{R}^n}{\text{minimize}} & \ \frac{1}{2}{x^TQx} + {c^Tx} \nonumber \\
+ *   \text{subject to} & \ A_{eq} x = b_{eq} \\
+ *   & \ A_{ineq} x \leq b_{ineq}
+ * \f}
  *
  */
 class QuadProgSparse : public QuadProgCommon
