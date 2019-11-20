@@ -92,8 +92,8 @@ protected:
 		bool isDecomp);
 
 protected:
-	MatrixXd Q_; /**< Cost function matrix. \note WILL BE DESTROYED ON EXIT */
-	VectorXd C_; /**< Cost function vector. \note WILL BE DESTROYED ON EXIT */
+	MatrixXd Q_; /**< Cost function matrix */
+	VectorXd C_; /**< Cost function vector */
     VectorXd B_; /**< Inequality constraint vector. \note ENTRIES CORRESPONDING TO EQUALITY CONSTRAINTS MAY HAVE CHANGED SIGNS ON EXIT */
     VectorXd X_; /**< Solution of the quadratic program */
 	int fail_; /**< Failure code, 0 is success */
@@ -153,10 +153,6 @@ public:
      * it is given \f$R^{-1}\f$.
      *
      * \return success True if the solver found a solution.
-     *
-     * \note Both Q and C will be destroyed on exit. Also, entries
-     * corresponding to equality constraints in Aeq and Beq may have changed
-     * signs on exit.
      *
      */
 	EIGEN_QUADPROG_API bool solve(const MatrixXd& Q, const VectorXd& C,
@@ -232,10 +228,6 @@ public:
      * it is given \f$R^{-1}\f$.
      *
      * \return success True if the solver found a solution.
-     *
-     * \note Both Q and C will be destroyed on exit. Also, entries
-     * corresponding to equality constraints in Aeq and Beq may have changed
-     * signs on exit.
      *
      */
 	EIGEN_QUADPROG_API bool solve(const MatrixXd& Q, const VectorXd& C,
