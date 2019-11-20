@@ -48,13 +48,41 @@ extern "C" int qpgen2_(double* dmat, double* dvec, const int* fddmat,
 class QuadProgCommon
 {
 public:
+    /** Default constructor.
+     *
+     */
 	EIGEN_QUADPROG_API QuadProgCommon();
 
+    /** Two-dimensional iteration vector.
+     *
+     * First component gives the number of "main" iterations, the second one
+     * says how many constraints were deleted after they became active.
+     *
+     */
 	EIGEN_QUADPROG_API const VectorXi& iter() const;
+
+    /** Failure code, 0 is success.
+     *
+     */
 	EIGEN_QUADPROG_API int fail() const;
 
+    /** Solution found by the solver.
+     *
+     */
 	EIGEN_QUADPROG_API const VectorXd& result() const;
 
+    /** Set problem dimensions.
+     *
+     * \param nrvar Dimension \f$n\f$ of optimization vector \f$x \in
+     * \mathbb{R}^n\f$.
+     *
+     * \param nreq Number of equality constraints, i.e. number of lines of
+     * \f$A_{eq}\f$ and \f$b_{eq}\f$.
+     *
+     * \param nrineq Number of inequality constraints, i.e. number of lines of
+     * \f$A_{ineq}\f$ and \f$b_{ineq}\f$.
+     *
+     */
 	EIGEN_QUADPROG_API void problem(int nrvar, int nreq, int nrineq);
 
 protected:
@@ -77,7 +105,6 @@ protected:
                       \f$2n+r(r+5)/2+2q+1\f$ where \f$r=\min(n,q)\f$ */
 };
 
-
 /** Dense quadratic program.
  *
  * \f{align}{
@@ -93,6 +120,18 @@ public:
 	EIGEN_QUADPROG_API QuadProgDense();
 	EIGEN_QUADPROG_API QuadProgDense(int nrvar, int nreq, int nrineq);
 
+    /** Set problem dimensions.
+     *
+     * \param nrvar Dimension \f$n\f$ of optimization vector \f$x \in
+     * \mathbb{R}^n\f$.
+     *
+     * \param nreq Number of equality constraints, i.e. number of lines of
+     * \f$A_{eq}\f$ and \f$b_{eq}\f$.
+     *
+     * \param nrineq Number of inequality constraints, i.e. number of lines of
+     * \f$A_{ineq}\f$ and \f$b_{ineq}\f$.
+     *
+     */
 	EIGEN_QUADPROG_API void problem(int nrvar, int nreq, int nrineq);
 
     /** Solve quadratic program.
@@ -112,6 +151,8 @@ public:
      * \param isDecomp If false (default), Q is not decomposed. If true, the
      * solver will assume that Q is already decomposed into \f$Q = R^T R\f$ and
      * it is given \f$R^{-1}\f$.
+     *
+     * \return success True if the solver found a solution.
      *
      * \note Both Q and C will be destroyed on exit. Also, entries
      * corresponding to equality constraints in Aeq and Beq may have changed
@@ -127,7 +168,6 @@ private:
 	MatrixXd A_; /**< Inequality constraint matrix. \note ENTRIES CORRESPONDING TO EQUALITY CONSTRAINTS MAY HAVE CHANGED SIGNES ON EXIT */
 };
 
-
 /** Sparse quadratic program.
  *
  * \f{align}{
@@ -140,9 +180,37 @@ private:
 class QuadProgSparse : public QuadProgCommon
 {
 public:
+    /** Default constructor.
+     *
+     */
 	EIGEN_QUADPROG_API QuadProgSparse();
+
+    /** Constructor with problem dimensions.
+     *
+     * \param nrvar Dimension \f$n\f$ of optimization vector \f$x \in
+     * \mathbb{R}^n\f$.
+     *
+     * \param nreq Number of equality constraints, i.e. number of lines of
+     * \f$A_{eq}\f$ and \f$b_{eq}\f$.
+     *
+     * \param nrineq Number of inequality constraints, i.e. number of lines of
+     * \f$A_{ineq}\f$ and \f$b_{ineq}\f$.
+     *
+     */
 	EIGEN_QUADPROG_API QuadProgSparse(int nrvar, int nreq, int nrineq);
 
+    /** Set problem dimensions.
+     *
+     * \param nrvar Dimension \f$n\f$ of optimization vector \f$x \in
+     * \mathbb{R}^n\f$.
+     *
+     * \param nreq Number of equality constraints, i.e. number of lines of
+     * \f$A_{eq}\f$ and \f$b_{eq}\f$.
+     *
+     * \param nrineq Number of inequality constraints, i.e. number of lines of
+     * \f$A_{ineq}\f$ and \f$b_{ineq}\f$.
+     *
+     */
 	EIGEN_QUADPROG_API void problem(int nrvar, int nreq, int nrineq);
 
     /** Solve quadratic program.
@@ -163,6 +231,8 @@ public:
      * solver will assume that Q is already decomposed into \f$Q = R^T R\f$ and
      * it is given \f$R^{-1}\f$.
      *
+     * \return success True if the solver found a solution.
+     *
      * \note Both Q and C will be destroyed on exit. Also, entries
      * corresponding to equality constraints in Aeq and Beq may have changed
      * signs on exit.
@@ -176,8 +246,8 @@ public:
 private:
 	MatrixXd A_; /**< Inequality constraint matrix. \note ENTRIES CORRESPONDING TO EQUALITY CONSTRAINTS MAY HAVE CHANGED SIGNS ON EXIT */
     MatrixXi iA_; /**< Inequality constraint matrix: these two matrices store
-                    the matrix A in compact form. the format is: 
-                    \f[ 
+                    the matrix A in compact form. the format is:
+                    \f[
                       A = [A1 A2]
                     \f]
            - iA_(1,i) is the number of non-zero elements in column i of A
