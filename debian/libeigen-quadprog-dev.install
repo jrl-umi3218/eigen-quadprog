@@ -1,0 +1,4 @@
+usr/include/*
+usr/lib/*/libeigen-quadprog.so
+usr/lib/*/pkgconfig/*
+usr/lib/cmake/*
