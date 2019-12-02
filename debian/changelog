@@ -1,0 +1,5 @@
+eigen-quadprog (1.0.0-1ubuntu1) unstable; urgency=medium
+
+  * Initial release
+
+ -- Pierre Gergondet <pierre.gergondet+ppa@gmail.com>  Mon, 02 Dec 2019 15:52:02 +0800

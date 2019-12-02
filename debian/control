@@ -1,0 +1,51 @@
+Source: eigen-quadprog
+Priority: optional
+Maintainer: Pierre Gergondet <pierre.gergondet+ppa@gmail.com>
+Standards-Version: 3.9.5
+Section: libs
+Homepage: http://github.com/jrl-umi3218/eigen-quadprog
+Vcs-Git: git://github.com/jrl-umi3218/eigen-quadprog
+Vcs-Browser: http://github.com/jrl-umi3218/eigen-quadprog
+Build-Depends: debhelper (>= 9),
+               pkg-config,
+               cmake,
+               doxygen,
+               gfortran,
+               libboost-test-dev,
+               libboost-timer-dev,
+               libboost-system-dev,
+               libeigen3-dev (>= 3.2)
+
+Package: libeigen-quadprog-dev
+Section: libdevel
+Architecture: any
+Depends: pkg-config,
+         libeigen3-dev (>= 3.2),
+         libeigen-quadprog1 (= ${binary:Version}),
+         ${misc:Depends}
+Suggests: libeigen-quadprog-doc
+Description: eigen-quadprog - development files
+ eigen-quadprog allow to use the QuadProg QP solver with the Eigen3 library.
+ .
+ This package contains development files (headers and shared library
+ symbolic link).
+
+
+Package: libeigen-quadprog1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: eigen-quadprog - QuadProg QP solver with Eigen3
+ eigen-quadprog allow to use the QuadProg QP solver with the Eigen3 library.
+
+Package: libeigen-quadprog-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Suggests: libeigen-quadprog-dev
+Description: eigen-quadprog API documentation
+ eigen-quadprog allow to use the QuadProg QP solver with the Eigen3 library.
+ .
+ This package provides the complete API documentation in HTML format.

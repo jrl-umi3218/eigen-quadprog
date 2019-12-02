@@ -1,17 +1,21 @@
 cmake_minimum_required(VERSION 3.1.3)
 
-include(cmake/base.cmake)
-include(cmake/boost.cmake)
-include(cmake/msvc-specific.cmake)
+set(CMAKE_CXX_STANDARD 11)
+set(CXX_DISABLE_WERROR True) # disable -Werror on Unix for now.
 
 set(PROJECT_NAME eigen-quadprog)
 set(PROJECT_DESCRIPTION "QuadProg QP solver through Eigen3 library.")
-set(PROJECT_URL "https://github.com/jorisv/RBDyn/eigen-quadprog")
+set(PROJECT_URL "https://github.com/jrl-umi3218/eigen-quadprog")
 set(PROJECT_DEBUG_POSTFIX "_d")
+set(PROJECT_VERSION 1.0.0)
+set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CXX_DISABLE_WERROR True) # disable -Werror on Unix for now.
 set(DOXYGEN_USE_MATHJAX "YES")
+
+include(cmake/base.cmake)
+include(cmake/msvc-specific.cmake)
+
+project(eigen-quadprog C CXX)
 
 option(USE_F2C "Use f2c converted code (usually slower)." OFF)
 if(WIN32)
@@ -22,10 +26,12 @@ endif()
 option(USE_FORTRAN_SUBDIRECTORY "Use cmake to generate sub project for fortran parts" ${USE_FORTRAN_SUBDIRECTORY_DEFAULT})
 option(DISABLE_TESTS "Disable unit tests." OFF)
 
-setup_project()
-set(PROJECT_VERSION 1.0.0)
-
-add_project_dependency(Eigen3 REQUIRED)
+find_package(Eigen3 QUIET NO_CMAKE_PACKAGE_REGISTRY)
+if(Eigen3_FOUND)
+  add_project_dependency(Eigen3 REQUIRED NO_CMAKE_PACKAGE_REGISTRY)
+else()
+  add_project_dependency(Eigen3 MODULE REQUIRED)
+endif()
 
 if(MSVC)
   if(USE_FORTRAN_SUBDIRECTORY)
@@ -39,9 +45,6 @@ endif(MSVC)
 
 add_subdirectory(src)
 
-if(NOT ${DISABLE_TESTS})
+if(${BUILD_TESTING})
   add_subdirectory(tests)
 endif()
-
-setup_project_finalize()
-setup_project_package_finalize()
