@@ -1,8 +1,29 @@
 # eigen-quadprog
 
+[![License](https://img.shields.io/github/license/jrl-umi3218/eigen-quadprog)](https://opensource.org/licenses/LGPL-3.0)
+[![CI](https://github.com/jrl-umi3218/eigen-quadprog/workflows/CI%20of%20eigen-quadprog/badge.svg?branch=master)](https://github.com/jrl-umi3218/eigen-quadprog/actions?query=workflow%3A%22CI+of+eigen-quadprog%22)
+[![Documentation](https://img.shields.io/badge/doxygen-online-brightgreen?logo=read-the-docs&style=flat)](http://jrl-umi3218.github.io/eigen-quadprog/doxygen/HEAD/index.html)
+
 eigen-quadprog allow to use the QuadProg QP solver with the Eigen3 library.
 
 ## Installing
+
+### Ubuntu LTS (16.04, 18.04, 20.04)
+
+```bash
+# Make sure you have required tools
+sudo apt install apt-transport-https lsb-release
+# Add our key
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key 892EA6EE273707C6495A6FB6220D644C64666806
+# Add our repository (stable versions)
+sudo sh -c 'echo "deb https://dl.bintray.com/gergondet/multi-contact-release $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multi-contact.list'
+# Use this to setup the HEAD version
+# sudo sh -c 'echo "deb https://dl.bintray.com/gergondet/multi-contact-head $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/multi-contact.list'
+# Update packages list
+sudo apt update
+# Install packages
+sudo apt install libeigen-quadprog-dev
+```
 
 ### Manual
 
@@ -23,7 +44,7 @@ To compile you need the following tools:
 #### Building
 
 ```sh
-git clone --recursive https://github.com/jorisv/eigen-quadprog
+git clone --recursive https://github.com/jrl-umi3218/eigen-quadprog
 cd eigen-quadprog
 mkdir _build
 cd _build
@@ -31,19 +52,7 @@ cmake [options] ..
 make && make intall
 ```
 
-Where the main options are:
+##### CMake options
 
- * `-DCMAKE_BUIlD_TYPE=Release` Build in Release mode
- * `-DCMAKE_INSTALL_PREFIX=some/path/to/install` default is `/usr/local`
- * `-DUNIT_TESTS=ON` Build unit tests.
- * `-DUSE_F2C=ON` Build with fortran source code translated in C (slower runtime).
-
-Pulling git subtree
-------
-
-To update cmake directory with their upstream git repository:
-
-```
-git fetch git://github.com/jrl-umi3218/jrl-cmakemodules.git master
-git subtree pull --prefix cmake git://github.com/jrl-umi3218/jrl-cmakemodules.git master --squash
-```
+ * `BUILD_TESTING` Enable unit tests building (ON/OFF, default: ON)
+ * `USE_F2C` Build with fortran source code translated in C (slower runtime) (ON/OFF, default: OFF).
