@@ -1,3 +1,9 @@
+eigen-quadprog (1.0.1-1ubuntu1) unstable; urgency=medium
+
+  * Fix a bug if nreq == 0 or nrineq == 0
+
+ -- Pierre Gergondet <pierre.gergondet+ppa@gmail.com>  Thu, 02 Jan 2020 19:14:33 +0800
+
 eigen-quadprog (1.0.0-1ubuntu1) unstable; urgency=medium
 
   * Initial release

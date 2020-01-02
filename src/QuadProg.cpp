@@ -135,8 +135,14 @@ bool QuadProgDense::solve(const MatrixXd& Q, const VectorXd& C,
 
 	fillQCBf(nreq, nrineq, Q, C, Beq, Bineq, isDecomp);
 
-	A_.block(0, 0, nrvar, nreq) = Aeq.transpose();
-	A_.block(0, nreq, nrvar, nrineq) = -Aineq.transpose();
+	if(nreq != 0)
+	{
+		A_.block(0, 0, nrvar, nreq) = Aeq.transpose();
+	}
+	if(nrineq != 0)
+	{
+		A_.block(0, nreq, nrvar, nrineq) = -Aineq.transpose();
+	}
 
 	qpgen2_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval,
 		A_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(), &nact,

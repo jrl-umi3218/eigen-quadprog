@@ -7,7 +7,7 @@ set(PROJECT_NAME eigen-quadprog)
 set(PROJECT_DESCRIPTION "QuadProg QP solver through Eigen3 library.")
 set(PROJECT_URL "https://github.com/jrl-umi3218/eigen-quadprog")
 set(PROJECT_DEBUG_POSTFIX "_d")
-set(PROJECT_VERSION 1.0.0)
+set(PROJECT_VERSION 1.0.1)
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
 set(DOXYGEN_USE_MATHJAX "YES")
