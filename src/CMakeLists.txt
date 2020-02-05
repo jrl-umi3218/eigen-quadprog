@@ -49,10 +49,12 @@ if(${USE_FORTRAN_SUBDIRECTORY})
     install(FILES ${quadprog_fortran_SHARED_LIBRARY} DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(FILES ${quadprog_fortran_STATIC_LIBRARY} DESTINATION ${CMAKE_INSTALL_LIBDIR})
     set(PACKAGE_EXTRA_MACROS "
-add_library(quadprog_fortran STATIC IMPORTED)
-set_target_properties(quadprog_fortran PROPERTIES
-  IMPORTED_LOCATION \"\${PACKAGE_PREFIX_DIR}/lib/libquadprog_fortran${CMAKE_STATIC_LIBRARY_SUFFIX}\"
-)
+if(NOT TARGET quadprog_fortran)
+  add_library(quadprog_fortran STATIC IMPORTED)
+  set_target_properties(quadprog_fortran PROPERTIES
+    IMPORTED_LOCATION \"\${PACKAGE_PREFIX_DIR}/lib/libquadprog_fortran${CMAKE_STATIC_LIBRARY_SUFFIX}\"
+  )
+endif()
 "
         PARENT_SCOPE)
   endif()
