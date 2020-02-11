@@ -76,8 +76,8 @@ void QuadProgCommon::problem(int nrvar, int nreq, int nrineq)
 
 
 void QuadProgCommon::fillQCBf(int nreq, int nrineq,
-	const MatrixXd& Q, const VectorXd& C,
-	const VectorXd& Beq, const VectorXd& Bineq,
+	const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
+	const Ref<const VectorXd>& Beq, const Ref<const VectorXd>& Bineq,
 	bool isDecomp)
 {
 	Q_ = Q;
@@ -116,9 +116,9 @@ void QuadProgDense::problem(int nrvar, int nreq, int nrineq)
 }
 
 
-bool QuadProgDense::solve(const MatrixXd& Q, const VectorXd& C,
-	const MatrixXd& Aeq, const VectorXd& Beq,
-	const MatrixXd& Aineq, const VectorXd& Bineq,
+bool QuadProgDense::solve(const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
+	const Ref<const MatrixXd>& Aeq, const Ref<const VectorXd>& Beq,
+	const Ref<const MatrixXd>& Aineq, const Ref<const VectorXd>& Bineq,
 	bool isDecomp)
 {
 	int nrvar = static_cast<int>(C.rows());
@@ -181,9 +181,9 @@ void QuadProgSparse::problem(int nrvar, int nreq, int nrineq)
 }
 
 
-bool QuadProgSparse::solve(const MatrixXd& Q, const VectorXd& C,
-	const SparseMatrix<double>& Aeq, const VectorXd& Beq,
-	const SparseMatrix<double>& Aineq, const VectorXd& Bineq,
+bool QuadProgSparse::solve(const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
+	const SparseMatrix<double>& Aeq, const Ref<const VectorXd>& Beq,
+	const SparseMatrix<double>& Aineq, const Ref<const VectorXd>& Bineq,
 	bool isDecomp)
 {
 	int nrvar = static_cast<int>(C.rows());
