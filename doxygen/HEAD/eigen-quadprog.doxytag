@@ -92,8 +92,8 @@
       <type>void</type>
       <name>fillQCBf</name>
       <anchorfile>a00563.html</anchorfile>
-      <anchor>af15daabc164fc6503503b610bd7701c7</anchor>
-      <arglist>(int nreq, int nrineq, const MatrixXd &amp;Q, const VectorXd &amp;C, const VectorXd &amp;Beq, const VectorXd &amp;Bineq, bool isDecomp)</arglist>
+      <anchor>aa6f3d424716b1f2e054ba4d531b4f447</anchor>
+      <arglist>(int nreq, int nrineq, const Ref&lt; const MatrixXd &gt; &amp;Q, const Ref&lt; const VectorXd &gt; &amp;C, const Ref&lt; const VectorXd &gt; &amp;Beq, const Ref&lt; const VectorXd &gt; &amp;Bineq, bool isDecomp)</arglist>
     </member>
     <member kind="variable" protection="protected">
       <type>MatrixXd</type>
@@ -181,8 +181,8 @@
       <type>EIGEN_QUADPROG_API bool</type>
       <name>solve</name>
       <anchorfile>a00567.html</anchorfile>
-      <anchor>ad3118d5264d164b4b5948f43cd03c4e2</anchor>
-      <arglist>(const MatrixXd &amp;Q, const VectorXd &amp;C, const MatrixXd &amp;Aeq, const VectorXd &amp;Beq, const MatrixXd &amp;Aineq, const VectorXd &amp;Bineq, bool isDecomp=false)</arglist>
+      <anchor>aabc3ed5167a3fd0f5e75cd5c9ac3fbdd</anchor>
+      <arglist>(const Ref&lt; const MatrixXd &gt; &amp;Q, const Ref&lt; const VectorXd &gt; &amp;C, const Ref&lt; const MatrixXd &gt; &amp;Aeq, const Ref&lt; const VectorXd &gt; &amp;Beq, const Ref&lt; const MatrixXd &gt; &amp;Aineq, const Ref&lt; const VectorXd &gt; &amp;Bineq, bool isDecomp=false)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -214,8 +214,8 @@
       <type>EIGEN_QUADPROG_API bool</type>
       <name>solve</name>
       <anchorfile>a00571.html</anchorfile>
-      <anchor>a12aa8c5b35c6a490dcadf41fa9f3b8f4</anchor>
-      <arglist>(const MatrixXd &amp;Q, const VectorXd &amp;C, const SparseMatrix&lt; double &gt; &amp;Aeq, const VectorXd &amp;Beq, const SparseMatrix&lt; double &gt; &amp;Aineq, const VectorXd &amp;Bineq, bool isDecomp=false)</arglist>
+      <anchor>ae82cef5c25505dd4bb70ac19d9835a59</anchor>
+      <arglist>(const Ref&lt; const MatrixXd &gt; &amp;Q, const Ref&lt; const VectorXd &gt; &amp;C, const SparseMatrix&lt; double &gt; &amp;Aeq, const Ref&lt; const VectorXd &gt; &amp;Beq, const SparseMatrix&lt; double &gt; &amp;Aineq, const Ref&lt; const VectorXd &gt; &amp;Bineq, bool isDecomp=false)</arglist>
     </member>
   </compound>
   <compound kind="namespace">

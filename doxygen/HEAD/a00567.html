@@ -100,9 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a28383450c7cca32223ff02ed0129692d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00008.html#a0af7c80014d34bf21d4761e99e292ebd">EIGEN_QUADPROG_API</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00567.html#a28383450c7cca32223ff02ed0129692d">problem</a> (int nrvar, int nreq, int nrineq)</td></tr>
 <tr class="memdesc:a28383450c7cca32223ff02ed0129692d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set problem dimensions.  <a href="#a28383450c7cca32223ff02ed0129692d">More...</a><br /></td></tr>
 <tr class="separator:a28383450c7cca32223ff02ed0129692d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3118d5264d164b4b5948f43cd03c4e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00008.html#a0af7c80014d34bf21d4761e99e292ebd">EIGEN_QUADPROG_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00567.html#ad3118d5264d164b4b5948f43cd03c4e2">solve</a> (const MatrixXd &amp;Q, const VectorXd &amp;C, const MatrixXd &amp;Aeq, const VectorXd &amp;Beq, const MatrixXd &amp;Aineq, const VectorXd &amp;Bineq, bool isDecomp=false)</td></tr>
-<tr class="memdesc:ad3118d5264d164b4b5948f43cd03c4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve quadratic program.  <a href="#ad3118d5264d164b4b5948f43cd03c4e2">More...</a><br /></td></tr>
-<tr class="separator:ad3118d5264d164b4b5948f43cd03c4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc3ed5167a3fd0f5e75cd5c9ac3fbdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00008.html#a0af7c80014d34bf21d4761e99e292ebd">EIGEN_QUADPROG_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00567.html#aabc3ed5167a3fd0f5e75cd5c9ac3fbdd">solve</a> (const Ref&lt; const MatrixXd &gt; &amp;Q, const Ref&lt; const VectorXd &gt; &amp;C, const Ref&lt; const MatrixXd &gt; &amp;Aeq, const Ref&lt; const VectorXd &gt; &amp;Beq, const Ref&lt; const MatrixXd &gt; &amp;Aineq, const Ref&lt; const VectorXd &gt; &amp;Bineq, bool isDecomp=false)</td></tr>
+<tr class="memdesc:aabc3ed5167a3fd0f5e75cd5c9ac3fbdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve quadratic program.  <a href="#aabc3ed5167a3fd0f5e75cd5c9ac3fbdd">More...</a><br /></td></tr>
+<tr class="separator:aabc3ed5167a3fd0f5e75cd5c9ac3fbdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_a00563"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00563')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00563.html">Eigen::QuadProgCommon</a></td></tr>
 <tr class="memitem:ac7a006b9cb25fc5c1fa27d45bb78bdde inherit pub_methods_a00563"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00008.html#a0af7c80014d34bf21d4761e99e292ebd">EIGEN_QUADPROG_API</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00563.html#ac7a006b9cb25fc5c1fa27d45bb78bdde">QuadProgCommon</a> ()</td></tr>
 <tr class="memdesc:ac7a006b9cb25fc5c1fa27d45bb78bdde inherit pub_methods_a00563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="a00563.html#ac7a006b9cb25fc5c1fa27d45bb78bdde">More...</a><br /></td></tr>
@@ -123,8 +123,8 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_a00563"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_a00563')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="a00563.html">Eigen::QuadProgCommon</a></td></tr>
-<tr class="memitem:af15daabc164fc6503503b610bd7701c7 inherit pro_methods_a00563"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00563.html#af15daabc164fc6503503b610bd7701c7">fillQCBf</a> (int nreq, int nrineq, const MatrixXd &amp;Q, const VectorXd &amp;C, const VectorXd &amp;Beq, const VectorXd &amp;Bineq, bool isDecomp)</td></tr>
-<tr class="separator:af15daabc164fc6503503b610bd7701c7 inherit pro_methods_a00563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f3d424716b1f2e054ba4d531b4f447 inherit pro_methods_a00563"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00563.html#aa6f3d424716b1f2e054ba4d531b4f447">fillQCBf</a> (int nreq, int nrineq, const Ref&lt; const MatrixXd &gt; &amp;Q, const Ref&lt; const VectorXd &gt; &amp;C, const Ref&lt; const VectorXd &gt; &amp;Beq, const Ref&lt; const VectorXd &gt; &amp;Bineq, bool isDecomp)</td></tr>
+<tr class="separator:aa6f3d424716b1f2e054ba4d531b4f447 inherit pro_methods_a00563"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_a00563"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_a00563')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="a00563.html">Eigen::QuadProgCommon</a></td></tr>
 <tr class="memitem:ade6b3b7402c19d572f55a18f79c8d212 inherit pro_attribs_a00563"><td class="memItemLeft" align="right" valign="top">MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00563.html#ade6b3b7402c19d572f55a18f79c8d212">Q_</a></td></tr>
 <tr class="memdesc:ade6b3b7402c19d572f55a18f79c8d212 inherit pro_attribs_a00563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cost function matrix.  <a href="a00563.html#ade6b3b7402c19d572f55a18f79c8d212">More...</a><br /></td></tr>
@@ -253,8 +253,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ad3118d5264d164b4b5948f43cd03c4e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3118d5264d164b4b5948f43cd03c4e2">&#9670;&nbsp;</a></span>solve()</h2>
+<a id="aabc3ed5167a3fd0f5e75cd5c9ac3fbdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabc3ed5167a3fd0f5e75cd5c9ac3fbdd">&#9670;&nbsp;</a></span>solve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,37 +262,37 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="a00008.html#a0af7c80014d34bf21d4761e99e292ebd">EIGEN_QUADPROG_API</a> bool Eigen::QuadProgDense::solve </td>
           <td>(</td>
-          <td class="paramtype">const MatrixXd &amp;&#160;</td>
+          <td class="paramtype">const Ref&lt; const MatrixXd &gt; &amp;&#160;</td>
           <td class="paramname"><em>Q</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const VectorXd &amp;&#160;</td>
+          <td class="paramtype">const Ref&lt; const VectorXd &gt; &amp;&#160;</td>
           <td class="paramname"><em>C</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const MatrixXd &amp;&#160;</td>
+          <td class="paramtype">const Ref&lt; const MatrixXd &gt; &amp;&#160;</td>
           <td class="paramname"><em>Aeq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const VectorXd &amp;&#160;</td>
+          <td class="paramtype">const Ref&lt; const VectorXd &gt; &amp;&#160;</td>
           <td class="paramname"><em>Beq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const MatrixXd &amp;&#160;</td>
+          <td class="paramtype">const Ref&lt; const MatrixXd &gt; &amp;&#160;</td>
           <td class="paramname"><em>Aineq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const VectorXd &amp;&#160;</td>
+          <td class="paramtype">const Ref&lt; const VectorXd &gt; &amp;&#160;</td>
           <td class="paramname"><em>Bineq</em>, </td>
         </tr>
         <tr>
@@ -333,7 +333,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="a00015.html">Eigen</a></li><li class="navelem"><a class="el" href="a00567.html">QuadProgDense</a></li>
-    <li class="footer">Generated on Wed Feb 5 2020 08:58:17 for eigen-quadprog by
+    <li class="footer">Generated on Wed Feb 12 2020 04:28:16 for eigen-quadprog by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>
