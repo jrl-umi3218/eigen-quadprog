@@ -87,8 +87,8 @@ public:
 
 protected:
 	void fillQCBf(int nreq, int nrineq,
-		const MatrixXd& Q, const VectorXd& C,
-		const VectorXd& Beq, const VectorXd& Bineq,
+		const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
+		const Ref<const VectorXd>& Beq, const Ref<const VectorXd>& Bineq,
 		bool isDecomp);
 
 protected:
@@ -155,9 +155,9 @@ public:
      * \return success True if the solver found a solution.
      *
      */
-	EIGEN_QUADPROG_API bool solve(const MatrixXd& Q, const VectorXd& C,
-		const MatrixXd& Aeq, const VectorXd& Beq,
-		const MatrixXd& Aineq, const VectorXd& Bineq,
+	EIGEN_QUADPROG_API bool solve(const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
+		const Ref<const MatrixXd>& Aeq, const Ref<const VectorXd>& Beq,
+		const Ref<const MatrixXd>& Aineq, const Ref<const VectorXd>& Bineq,
 		bool isDecomp=false);
 
 private:
@@ -230,9 +230,9 @@ public:
      * \return success True if the solver found a solution.
      *
      */
-	EIGEN_QUADPROG_API bool solve(const MatrixXd& Q, const VectorXd& C,
-		const SparseMatrix<double>& Aeq, const VectorXd& Beq,
-		const SparseMatrix<double>& Aineq, const VectorXd& Bineq,
+	EIGEN_QUADPROG_API bool solve(const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
+		const SparseMatrix<double>& Aeq, const Ref<const VectorXd>& Beq,
+		const SparseMatrix<double>& Aineq, const Ref<const VectorXd>& Bineq,
 		bool isDecomp=false);
 
 private:
