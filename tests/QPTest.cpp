@@ -142,8 +142,14 @@ BOOST_AUTO_TEST_CASE(QuadProgDense)
 
 	// give the decomposition to quad prog
 	// ok that's not realy clever with QP1 because Q is identity.
+#if EIGEN_VERSION_AT_LEAST(3, 2, 90)
 	Eigen::MatrixXd Linv = qp1.Q.llt().matrixU();
 	qp.solve(Linv.inverse(), qp1.C,
+#else
+	Eigen::MatrixXd U = qp1.Q.llt().matrixU();
+	Eigen::MatrixXd Linv = U.inverse();
+	qp.solve(Linv, qp1.C,
+#endif
 		qp1.Aeq, qp1.Beq,
 		qp1.Aineq, qp1.Bineq, true);
 
@@ -174,8 +180,14 @@ BOOST_AUTO_TEST_CASE(QuadProgSparse)
 
 	// give the decomposition to quad prog
 	// ok that's not realy clever with QP1 because Q is identity.
+#if EIGEN_VERSION_AT_LEAST(3, 2, 90)
 	Eigen::MatrixXd Linv = qp1.Q.llt().matrixU();
 	qp.solve(Linv.inverse(), qp1.C,
+#else
+	Eigen::MatrixXd U = qp1.Q.llt().matrixU();
+	Eigen::MatrixXd Linv = U.inverse();
+	qp.solve(Linv, qp1.C,
+#endif
 		SAeq, qp1.Beq,
 		SAineq, qp1.Bineq, true);
 
