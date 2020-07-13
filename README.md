@@ -25,6 +25,19 @@ sudo apt update
 sudo apt install libeigen-quadprog-dev
 ```
 
+### Conan
+
+Install the latest version using [conan](https://conan.io/)
+
+```bash
+conan remote add multi-contact https://api.bintray.com/conan/gergondet/multi-contact
+# Install the latest release
+conan install eigen-qld/latest@multi-contact/stable
+# Or install the latest development version
+# conan install eigen-qld/latest@multi-contact/dev
+```
+
+
 ### Manual
 
 #### Dependencies
