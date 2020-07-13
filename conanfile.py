@@ -22,8 +22,12 @@ class EigenQuadProgConan(base.Eigen3ToPythonConan):
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
     requires = (
-        "Eigen3ToPython/latest@multi-contact/dev"
+        "eigen/3.3.4@conan/stable"
     )
+
+    def config_options(self):
+        del self.options.python2_version
+        del self.options.python3_version
 
     # build_requirements and system_requirements taken from https://github.com/conan-community/conan-lapack to fetch a Fortran compiler
     def build_requirements(self):
@@ -50,3 +54,6 @@ class EigenQuadProgConan(base.Eigen3ToPythonConan):
             except Exception:
                 self.output.warn("brew install gcc failed. Tying to fix it with 'brew link'")
                 self.run("brew link --overwrite gcc")
+
+    def package_id(self):
+        pass
