@@ -1,7 +1,7 @@
 var hierarchy =
 [
-    [ "Eigen::QuadProgCommon", "a00563.html", [
-      [ "Eigen::QuadProgDense", "a00567.html", null ],
-      [ "Eigen::QuadProgSparse", "a00571.html", null ]
+    [ "Eigen::QuadProgCommon", "classEigen_1_1QuadProgCommon.html", [
+      [ "Eigen::QuadProgDense", "classEigen_1_1QuadProgDense.html", null ],
+      [ "Eigen::QuadProgSparse", "classEigen_1_1QuadProgSparse.html", null ]
     ] ]
 ];

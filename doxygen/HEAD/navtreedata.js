@@ -30,7 +30,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"a00008.html"
+"QuadProg_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
