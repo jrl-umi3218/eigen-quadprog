@@ -49,6 +49,7 @@ if(${USE_FORTRAN_SUBDIRECTORY})
     install(FILES ${quadprog_fortran_SHARED_LIBRARY} DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(FILES ${quadprog_fortran_STATIC_LIBRARY} DESTINATION ${CMAKE_INSTALL_LIBDIR})
     set(PACKAGE_EXTRA_MACROS "
+get_filename_component(PACKAGE_PREFIX_DIR \"\${CMAKE_CURRENT_LIST_DIR}/../../../\" ABSOLUTE)
 if(NOT TARGET quadprog_fortran)
   add_library(quadprog_fortran STATIC IMPORTED)
   set_target_properties(quadprog_fortran PROPERTIES
