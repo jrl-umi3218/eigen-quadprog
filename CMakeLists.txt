@@ -6,7 +6,11 @@ set(CXX_DISABLE_WERROR True) # disable -Werror on Unix for now.
 set(PROJECT_NAME eigen-quadprog)
 set(PROJECT_DESCRIPTION "QuadProg QP solver through Eigen3 library.")
 set(PROJECT_URL "https://github.com/jrl-umi3218/eigen-quadprog")
-set(PROJECT_DEBUG_POSTFIX "_d")
+
+if (NOT DEFINED PROJECT_DEBUG_POSTFIX)
+    set(PROJECT_DEBUG_POSTFIX "_d")
+endif()
+
 set(PROJECT_VERSION 1.0.1)
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
