@@ -29,12 +29,12 @@ namespace Eigen
 extern "C" int qpgen1_(double* dmat, double* dvec, const int* fddmat,
 	const int* n, double* sol, double* crval, double* amat, const int* iamat,
 	double* bvec, const int* fdamat, const int* q, const int* meq, int* iact,
-	int* nact, int* iter, double* work, const int* ierr);
+	int* nact, int* iter, double* work, const int* ierr, double* tol, int* maxiter);
 
 extern "C" int qpgen2_(double* dmat, double* dvec, const int* fddmat,
 	const int* n, double* sol, double* crval, double* amat, double* bvec,
 	const int* fdamat, const int* q, const int* meq, int* iact, int* nact,
-	int* iter, double* work, const int* ierr);
+	int* iter, double* work, const int* ierr, double* tol, int* maxiter);
 
 /** Common method for Quadprog solver classes.
  *
@@ -71,6 +71,32 @@ public:
      */
 	EIGEN_QUADPROG_API const VectorXd& result() const;
 
+    /** Maximum iteration count
+     *
+     * Defaults to max(50, 5 * (nrvar + nreq + nrineq) if 0
+     *
+     */
+	EIGEN_QUADPROG_API int maxiter() const;
+
+    /** Set the maximum iteration count
+     *
+     */
+	EIGEN_QUADPROG_API void maxiter(int maxiter);
+
+    /** Constraint violation tolerance used by the solver
+     *
+     * Throw if maxiter < 0
+     *
+     */
+	EIGEN_QUADPROG_API double tolerance() const;
+
+    /** Set the constraint violation tolerance used by the solver
+     *
+     * If tol < 0, act as tolerance(-tol)
+     *
+     */
+	EIGEN_QUADPROG_API void tolerance(double tol);
+
     /** Set problem dimensions.
      *
      * \param nrvar Dimension \f$n\f$ of optimization vector \f$x \in
@@ -103,6 +129,8 @@ protected:
                       deleted after they became active */
     VectorXd work_; /**< Working space vector with length at least
                       \f$2n+r(r+5)/2+2q+1\f$ where \f$r=\min(n,q)\f$ */
+	double tol_; /**< Constraint violation tolerance */
+	int maxiter_; /**< Maximum iteration count */
 };
 
 /** Dense quadratic program.

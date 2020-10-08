@@ -67,6 +67,8 @@ c  ierr   integer, code for the status of the matrix D:
 c            ierr =  0, we have to decompose D
 c            ierr != 0, D is already decomposed into D=R^TR and we were
 c                       given R^{-1}.
+c  tol    scalar, constraint violation tolerance allowed by the solver
+c  maxiter  integer, maximum iteration count
 c
 c  Output parameter:
 c  sol   nx1 the final solution (x in the notation above)
@@ -82,24 +84,29 @@ c           ierr = 0, no problems
 c           ierr = 1, the minimization problem has no solution
 c           ierr = 2, problems with decomposing D, in this case sol
 c                     contains garbage!!
+c           ierr = 3, max iterations reached
 c
 c  Working space:
 c  work  vector with length at least 2*n+r*(r+5)/2 + 2*q +1
 c        where r=min(n,q)
 c
       subroutine qpgen1(dmat, dvec, fddmat, n, sol, crval, amat, iamat,
-     *     bvec, fdamat, q, meq, iact, nact, iter, work, ierr)  
+     *     bvec, fdamat, q, meq, iact, nact, iter, work, ierr, tol,
+     *     maxiter)
       implicit none
       integer n, i, j, l, l1, fdamat, fddmat,
      *     info, q, iamat(fdamat+1,*), iact(*), iter(*), it1,
      *     ierr, nact, iwzv, iwrv, iwrm, iwsv, iwuv, nvl,
-     *     r, iwnbv, meq
+     *     r, iwnbv, meq, maxiter
       double precision dmat(fddmat,*), dvec(*),sol(*), bvec(*),
      *     work(*), temp, sum, t1, tt, gc, gs, crval,
-     *     nu, amat(fdamat,*)
+     *     nu, amat(fdamat,*), tol
       logical t1inf, t2min
       r = min(n,q)
       l = 2*n + (r*(r+5))/2 + 2*q + 1
+      if( maxiter .EQ. 0) then
+        maxiter = max(50, 5 * (n + q))
+      endif
 c 
 c store the initial dvec to calculate below the unconstrained minima of
 c the critical value.
@@ -186,6 +193,10 @@ c
 c start a new iteration      
 c
       iter(1) = iter(1)+1
+      if (iter(1) .GT. maxiter) then
+        ierr = 3
+        goto 999
+      endif
 c
 c calculate all constraints and check which are still violated
 c for the equality constraints we have to check whether the normal
@@ -225,7 +236,7 @@ c by obvious commenting and uncommenting we can choose the strategy to
 c take always the first constraint which is violated. ;-)
 c
       nvl = 0 
-      temp = 0.d0
+      temp = -tol
       do 71 i=1,q
          if (work(iwsv+i) .LT. temp*work(iwnbv+i)) then
             nvl = i
