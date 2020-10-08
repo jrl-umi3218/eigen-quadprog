@@ -31,7 +31,7 @@ jobs:
         echo "::set-env name=REJECTION::Upstream version in debian/changelog does not match tag"
         head -n 1 debian/changelog | grep -q "eigen-quadprog (${VERSION}"
         echo "::set-env name=REJECTION::Conan package version does not match tag"
-        grep -q '    version = "${VERSION}"' conanfile.py
+        grep -q "version = \"${VERSION}\"" conanfile.py
         echo "::set-env name=REJECTION::"
         export TAG=`echo ${{ github.ref }} | sed -e 's@refs/tags/@@'`
         echo "::set-env name=RELEASE_TAG::${TAG}"
@@ -252,10 +252,10 @@ jobs:
     - name: Request mirror sync
       run: 'curl -ugergondet:${{ secrets.BINTRAY_API_KEY }} --header "X-GPG-PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}" -X POST https://api.bintray.com/calc_metadata/gergondet/${{ env.BINTRAY_REPO }}
 
-'
+        '
       if: env.PACKAGE_UPLOAD == 'true'
     - name: Trigger dependents rebuild
       run: 'curl -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token ${{ secrets.GH_PAGES_TOKEN }}" --request POST --data "{\"event_type\": \"${PACKAGE_JOB}\"}" https://api.github.com/repos/jrl-umi3218/Tasks/dispatches
 
-'
+        '
       if: env.PACKAGE_UPLOAD == 'true'

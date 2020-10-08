@@ -1,3 +1,9 @@
+eigen-quadprog (1.1.0-1ubuntu1) unstable; urgency=medium
+
+  * Bump upstream version
+
+ -- Pierre Gergondet <pierre.gergondet+ppa@gmail.com>  Thu, 08 Oct 2020 23:41:53 +0800
+
 eigen-quadprog (1.0.1-1ubuntu1) unstable; urgency=medium
 
   * Fix a bug if nreq == 0 or nrineq == 0
