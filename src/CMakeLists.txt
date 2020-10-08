@@ -63,7 +63,7 @@ endif()
 endif()
 
 if(${USE_F2C})
-  target_link_libraries(${PROJECT_NAME} libf2c.a)
+  target_link_libraries(${PROJECT_NAME} PUBLIC libf2c.a)
 endif()
 
 install(
