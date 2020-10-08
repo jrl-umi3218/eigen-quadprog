@@ -32,7 +32,8 @@ QuadProgCommon::QuadProgCommon():
 	X_(),
 	fail_(0),
 	iact_(),
-	iter_(2)
+	iter_(2),
+	tol_(0.0)
 {
 }
 
@@ -48,6 +49,20 @@ int QuadProgCommon::fail() const
 	return fail_;
 }
 
+double QuadProgCommon::tolerance() const
+{
+	return tol_;
+}
+
+void QuadProgCommon::tolerance(double tol)
+{
+	if(tol < 0.0)
+	{
+		tolerance(-tol);
+		return;
+	}
+	tol_ = tol;
+}
 
 const VectorXd& QuadProgCommon::result() const
 {
@@ -146,7 +161,7 @@ bool QuadProgDense::solve(const Ref<const MatrixXd>& Q, const Ref<const VectorXd
 
 	qpgen2_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval,
 		A_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(), &nact,
-		iter_.data(), work_.data(), &fail_);
+		iter_.data(), work_.data(), &fail_, &tol_);
 
 	return fail_ == 0;
 }
@@ -226,7 +241,7 @@ bool QuadProgSparse::solve(const Ref<const MatrixXd>& Q, const Ref<const VectorX
 
 	qpgen1_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval,
 		A_.data(), iA_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(), &nact,
-		iter_.data(), work_.data(), &fail_);
+		iter_.data(), work_.data(), &fail_, &tol_);
 
 	return fail_ == 0;
 }

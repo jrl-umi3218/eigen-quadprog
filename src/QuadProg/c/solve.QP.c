@@ -72,6 +72,7 @@
 /*            ierr =  0, we have to decompose D */
 /*            ierr != 0, D is already decomposed into D=R^TR and we were */
 /*                       given R^{-1}. */
+/*  tol    scalar, constraint violation tolerance allowed by the solver */
 
 /*  Output parameter: */
 /*  sol   nx1 the final solution (x in the notation above) */
@@ -97,7 +98,7 @@
 	fddmat, integer *n, doublereal *sol, doublereal *crval, doublereal *
 	amat, doublereal *bvec, integer *fdamat, integer *q, integer *meq, 
 	integer *iact, integer *nact, integer *iter, doublereal *work, 
-	integer *ierr)
+	integer *ierr, doublereal *tol)
 {
     /* System generated locals */
     integer dmat_dim1, dmat_offset, amat_dim1, amat_offset, i__1, i__2;
@@ -299,7 +300,7 @@ L50:
 /* take always the first constraint which is violated. ;-) */
 
     nvl = 0;
-    temp = -1e-14;
+    temp = -(*tol);
     i__1 = *q;
     for (i__ = 1; i__ <= i__1; ++i__) {
 	if (work[iwsv + i__] < temp * work[iwnbv + i__]) {

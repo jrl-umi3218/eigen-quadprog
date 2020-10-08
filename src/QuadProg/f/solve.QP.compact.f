@@ -83,13 +83,14 @@ c           ierr = 1, the minimization problem has no solution
 c           ierr = 2, problems with decomposing D, in this case sol
 c                     contains garbage!!
 c           ierr = 3, max iterations reached
+c  tol    scalar, constraint violation tolerance allowed by the solver
 c
 c  Working space:
 c  work  vector with length at least 2*n+r*(r+5)/2 + 2*q +1
 c        where r=min(n,q)
 c
       subroutine qpgen1(dmat, dvec, fddmat, n, sol, crval, amat, iamat,
-     *     bvec, fdamat, q, meq, iact, nact, iter, work, ierr)  
+     *     bvec, fdamat, q, meq, iact, nact, iter, work, ierr, tol)
       implicit none
       integer n, i, j, l, l1, fdamat, fddmat,
      *     info, q, iamat(fdamat+1,*), iact(*), iter(*), it1,
@@ -97,7 +98,7 @@ c
      *     r, iwnbv, meq, maxiter
       double precision dmat(fddmat,*), dvec(*),sol(*), bvec(*),
      *     work(*), temp, sum, t1, tt, gc, gs, crval,
-     *     nu, amat(fdamat,*)
+     *     nu, amat(fdamat,*), tol
       logical t1inf, t2min
       r = min(n,q)
       l = 2*n + (r*(r+5))/2 + 2*q + 1
@@ -231,7 +232,7 @@ c by obvious commenting and uncommenting we can choose the strategy to
 c take always the first constraint which is violated. ;-)
 c
       nvl = 0 
-      temp = -1d-14
+      temp = -tol
       do 71 i=1,q
          if (work(iwsv+i) .LT. temp*work(iwnbv+i)) then
             nvl = i

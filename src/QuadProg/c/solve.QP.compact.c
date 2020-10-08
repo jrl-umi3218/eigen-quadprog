@@ -97,6 +97,7 @@
 /*           ierr = 2, problems with decomposing D, in this case sol */
 /*                     contains garbage!! */
 /*           ierr = 3, max iterations reached */
+/*  tol    scalar, constraint violation tolerance allowed by the solver */
 
 /*  Working space: */
 /*  work  vector with length at least 2*n+r*(r+5)/2 + 2*q +1 */
@@ -106,7 +107,7 @@
 	fddmat, integer *n, doublereal *sol, doublereal *crval, doublereal *
 	amat, integer *iamat, doublereal *bvec, integer *fdamat, integer *q, 
 	integer *meq, integer *iact, integer *nact, integer *iter, doublereal 
-	*work, integer *ierr)
+	*work, integer *ierr, doublereal *tol)
 {
     /* System generated locals */
     integer iamat_dim1, iamat_offset, dmat_dim1, dmat_offset, amat_dim1, 
@@ -313,7 +314,7 @@ L50:
 /* take always the first constraint which is violated. ;-) */
 
     nvl = 0;
-    temp = -1e-14;
+    temp = -(*tol);
     i__1 = *q;
     for (i__ = 1; i__ <= i__1; ++i__) {
 	if (work[iwsv + i__] < temp * work[iwnbv + i__]) {
