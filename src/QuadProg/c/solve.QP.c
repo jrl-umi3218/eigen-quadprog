@@ -73,6 +73,7 @@
 /*            ierr != 0, D is already decomposed into D=R^TR and we were */
 /*                       given R^{-1}. */
 /*  tol    scalar, constraint violation tolerance allowed by the solver */
+/*  maxiter integer, maximum iteration count */
 
 /*  Output parameter: */
 /*  sol   nx1 the final solution (x in the notation above) */
@@ -98,7 +99,7 @@
 	fddmat, integer *n, doublereal *sol, doublereal *crval, doublereal *
 	amat, doublereal *bvec, integer *fdamat, integer *q, integer *meq, 
 	integer *iact, integer *nact, integer *iter, doublereal *work, 
-	integer *ierr, doublereal *tol)
+	integer *ierr, doublereal *tol, integer *maxiter)
 {
     /* System generated locals */
     integer dmat_dim1, dmat_offset, amat_dim1, amat_offset, i__1, i__2;
@@ -119,7 +120,7 @@
     extern /* Subroutine */ int dpofa_(doublereal *, integer *, integer *, 
 	    integer *), dpori_(doublereal *, integer *, integer *), dposl_(
 	    doublereal *, integer *, integer *, doublereal *);
-    static integer iwnbv, maxiter;
+    static integer iwnbv;
 
     /* Parameter adjustments */
     --dvec;
@@ -138,9 +139,11 @@
     /* Function Body */
     r__ = min(*n,*q);
     l = (*n << 1) + r__ * (r__ + 5) / 2 + (*q << 1) + 1;
+    if (*maxiter == 0) {
 /* Computing MAX */
-    i__1 = 50, i__2 = (*n + *q) * 5;
-    maxiter = max(i__1,i__2);
+	i__1 = 50, i__2 = (*n + *q) * 5;
+	*maxiter = max(i__1,i__2);
+    }
 
 /* store the initial dvec to calculate below the unconstrained minima of */
 /* the critical value. */
@@ -249,7 +252,7 @@ L50:
 /* start a new iteration */
 
     ++iter[1];
-    if (iter[1] > maxiter) {
+    if (iter[1] > *maxiter) {
 	*ierr = 3;
 	goto L999;
     }

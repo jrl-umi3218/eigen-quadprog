@@ -59,6 +59,7 @@ c            ierr =  0, we have to decompose D
 c            ierr != 0, D is already decomposed into D=R^TR and we were
 c                       given R^{-1}.
 c  tol    scalar, constraint violation tolerance allowed by the solver
+c  maxiter integer, maximum iteration count
 c
 c  Output parameter:
 c  sol   nx1 the final solution (x in the notation above)
@@ -81,7 +82,8 @@ c  work  vector with length at least 2*n+r*(r+5)/2 + 2*q +1
 c        where r=min(n,q)
 c
       subroutine qpgen2(dmat, dvec, fddmat, n, sol, crval, amat,
-     *     bvec, fdamat, q, meq, iact, nact, iter, work, ierr, tol)
+     *     bvec, fdamat, q, meq, iact, nact, iter, work, ierr, tol,
+     *     maxiter)
       implicit none
       integer n, i, j, l, l1, fdamat, fddmat,
      *     info, q, iact(*), iter(*), it1,
@@ -93,7 +95,9 @@ c
       logical t1inf, t2min
       r = min(n,q)
       l = 2*n + (r*(r+5))/2 + 2*q + 1
-      maxiter = max(50, 5 * (n + q))
+      if( maxiter .EQ. 0) then
+        maxiter = max(50, 5 * (n + q))
+      endif
 c 
 c store the initial dvec to calculate below the unconstrained minima of
 c the critical value.

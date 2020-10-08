@@ -81,6 +81,8 @@
 /*            ierr =  0, we have to decompose D */
 /*            ierr != 0, D is already decomposed into D=R^TR and we were */
 /*                       given R^{-1}. */
+/*  tol    scalar, constraint violation tolerance allowed by the solver */
+/*  maxiter  integer, maximum iteration count */
 
 /*  Output parameter: */
 /*  sol   nx1 the final solution (x in the notation above) */
@@ -97,7 +99,6 @@
 /*           ierr = 2, problems with decomposing D, in this case sol */
 /*                     contains garbage!! */
 /*           ierr = 3, max iterations reached */
-/*  tol    scalar, constraint violation tolerance allowed by the solver */
 
 /*  Working space: */
 /*  work  vector with length at least 2*n+r*(r+5)/2 + 2*q +1 */
@@ -107,7 +108,7 @@
 	fddmat, integer *n, doublereal *sol, doublereal *crval, doublereal *
 	amat, integer *iamat, doublereal *bvec, integer *fdamat, integer *q, 
 	integer *meq, integer *iact, integer *nact, integer *iter, doublereal 
-	*work, integer *ierr, doublereal *tol)
+	*work, integer *ierr, doublereal *tol, integer *maxiter)
 {
     /* System generated locals */
     integer iamat_dim1, iamat_offset, dmat_dim1, dmat_offset, amat_dim1, 
@@ -129,7 +130,7 @@
     extern /* Subroutine */ int dpofa_(doublereal *, integer *, integer *, 
 	    integer *), dpori_(doublereal *, integer *, integer *), dposl_(
 	    doublereal *, integer *, integer *, doublereal *);
-    static integer iwnbv, maxiter;
+    static integer iwnbv;
 
     /* Parameter adjustments */
     --dvec;
@@ -151,9 +152,11 @@
     /* Function Body */
     r__ = min(*n,*q);
     l = (*n << 1) + r__ * (r__ + 5) / 2 + (*q << 1) + 1;
+    if (*maxiter == 0) {
 /* Computing MAX */
-    i__1 = 50, i__2 = (*n + *q) * 5;
-    maxiter = max(i__1,i__2);
+	i__1 = 50, i__2 = (*n + *q) * 5;
+	*maxiter = max(i__1,i__2);
+    }
 
 /* store the initial dvec to calculate below the unconstrained minima of */
 /* the critical value. */
@@ -262,7 +265,7 @@ L50:
 /* start a new iteration */
 
     ++iter[1];
-    if (iter[1] > maxiter) {
+    if (iter[1] > *maxiter) {
 	*ierr = 3;
 	goto L999;
     }
