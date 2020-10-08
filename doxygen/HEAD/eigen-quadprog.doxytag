@@ -39,15 +39,15 @@
       <type>int</type>
       <name>qpgen1_</name>
       <anchorfile>namespaceEigen.html</anchorfile>
-      <anchor>a5de6a01bef47f841b3657c5e2d3c42c4</anchor>
-      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, const int *iamat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr)</arglist>
+      <anchor>ad3bfb7eb46287440d2e75a2396a76c7f</anchor>
+      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, const int *iamat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr, double *tol, int *maxiter)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>qpgen2_</name>
       <anchorfile>namespaceEigen.html</anchorfile>
-      <anchor>a1a9bc2322f12c41652d5595e5ef8ef4f</anchor>
-      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr)</arglist>
+      <anchor>a18071e8a41973e397737334385593da4</anchor>
+      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr, double *tol, int *maxiter)</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -80,6 +80,34 @@
       <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
       <anchor>a1f9c37ae16afaa7cac4c7e6d7217440e</anchor>
       <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>EIGEN_QUADPROG_API int</type>
+      <name>maxiter</name>
+      <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
+      <anchor>a094b6966afd52ca9bcd4e23cdf727734</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>EIGEN_QUADPROG_API void</type>
+      <name>maxiter</name>
+      <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
+      <anchor>ad7aaeae1debcef9d303c626a84e6fa73</anchor>
+      <arglist>(int maxiter)</arglist>
+    </member>
+    <member kind="function">
+      <type>EIGEN_QUADPROG_API double</type>
+      <name>tolerance</name>
+      <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
+      <anchor>a9dcea86e2f623a5df82d8bc377056493</anchor>
+      <arglist>() const</arglist>
+    </member>
+    <member kind="function">
+      <type>EIGEN_QUADPROG_API void</type>
+      <name>tolerance</name>
+      <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
+      <anchor>ad35589608e541ff5d6fcca50e54b6042</anchor>
+      <arglist>(double tol)</arglist>
     </member>
     <member kind="function">
       <type>EIGEN_QUADPROG_API void</type>
@@ -149,6 +177,20 @@
       <name>work_</name>
       <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
       <anchor>a57f15a96f84d1e74303eaa18771dc6dc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>double</type>
+      <name>tol_</name>
+      <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
+      <anchor>a7363aa4e1cfa960e70996110c12dcec1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="protected">
+      <type>int</type>
+      <name>maxiter_</name>
+      <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
+      <anchor>a37e613dfe2f2bb0e3603536423366b70</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -228,15 +270,15 @@
       <type>int</type>
       <name>qpgen1_</name>
       <anchorfile>namespaceEigen.html</anchorfile>
-      <anchor>a5de6a01bef47f841b3657c5e2d3c42c4</anchor>
-      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, const int *iamat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr)</arglist>
+      <anchor>ad3bfb7eb46287440d2e75a2396a76c7f</anchor>
+      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, const int *iamat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr, double *tol, int *maxiter)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>qpgen2_</name>
       <anchorfile>namespaceEigen.html</anchorfile>
-      <anchor>a1a9bc2322f12c41652d5595e5ef8ef4f</anchor>
-      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr)</arglist>
+      <anchor>a18071e8a41973e397737334385593da4</anchor>
+      <arglist>(double *dmat, double *dvec, const int *fddmat, const int *n, double *sol, double *crval, double *amat, double *bvec, const int *fdamat, const int *q, const int *meq, int *iact, int *nact, int *iter, double *work, const int *ierr, double *tol, int *maxiter)</arglist>
     </member>
   </compound>
 </tagfile>

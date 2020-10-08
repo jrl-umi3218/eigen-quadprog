@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['problem',['problem',['../classEigen_1_1QuadProgCommon.html#a50ec363cf204e14bd48c5c08fc4c355e',1,'Eigen::QuadProgCommon::problem()'],['../classEigen_1_1QuadProgDense.html#a28383450c7cca32223ff02ed0129692d',1,'Eigen::QuadProgDense::problem()'],['../classEigen_1_1QuadProgSparse.html#aec7c28073dbc7988f465d198ad8cf56b',1,'Eigen::QuadProgSparse::problem()']]]
+  ['maxiter',['maxiter',['../classEigen_1_1QuadProgCommon.html#a094b6966afd52ca9bcd4e23cdf727734',1,'Eigen::QuadProgCommon::maxiter() const'],['../classEigen_1_1QuadProgCommon.html#ad7aaeae1debcef9d303c626a84e6fa73',1,'Eigen::QuadProgCommon::maxiter(int maxiter)']]],
+  ['maxiter_5f',['maxiter_',['../classEigen_1_1QuadProgCommon.html#a37e613dfe2f2bb0e3603536423366b70',1,'Eigen::QuadProgCommon']]]
 ];
