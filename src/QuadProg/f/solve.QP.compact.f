@@ -231,7 +231,7 @@ c by obvious commenting and uncommenting we can choose the strategy to
 c take always the first constraint which is violated. ;-)
 c
       nvl = 0 
-      temp = 0.d0
+      temp = -1d-14
       do 71 i=1,q
          if (work(iwsv+i) .LT. temp*work(iwnbv+i)) then
             nvl = i

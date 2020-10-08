@@ -313,7 +313,7 @@ L50:
 /* take always the first constraint which is violated. ;-) */
 
     nvl = 0;
-    temp = 0.;
+    temp = -1e-14;
     i__1 = *q;
     for (i__ = 1; i__ <= i__1; ++i__) {
 	if (work[iwsv + i__] < temp * work[iwnbv + i__]) {
