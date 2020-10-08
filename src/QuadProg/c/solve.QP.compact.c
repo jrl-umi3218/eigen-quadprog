@@ -1,4 +1,4 @@
-/* f/solve.QP.compact.f -- translated by f2c (version 20100827).
+/* solve.QP.compact.f -- translated by f2c (version 20160102).
    You must link the resulting object file with libf2c:
 	on Microsoft Windows system, link with libf2c.lib;
 	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
@@ -96,6 +96,7 @@
 /*           ierr = 1, the minimization problem has no solution */
 /*           ierr = 2, problems with decomposing D, in this case sol */
 /*                     contains garbage!! */
+/*           ierr = 3, max iterations reached */
 
 /*  Working space: */
 /*  work  vector with length at least 2*n+r*(r+5)/2 + 2*q +1 */
@@ -127,7 +128,7 @@
     extern /* Subroutine */ int dpofa_(doublereal *, integer *, integer *, 
 	    integer *), dpori_(doublereal *, integer *, integer *), dposl_(
 	    doublereal *, integer *, integer *, doublereal *);
-    static integer iwnbv;
+    static integer iwnbv, maxiter;
 
     /* Parameter adjustments */
     --dvec;
@@ -149,6 +150,9 @@
     /* Function Body */
     r__ = min(*n,*q);
     l = (*n << 1) + r__ * (r__ + 5) / 2 + (*q << 1) + 1;
+/* Computing MAX */
+    i__1 = 50, i__2 = (*n + *q) * 5;
+    maxiter = max(i__1,i__2);
 
 /* store the initial dvec to calculate below the unconstrained minima of */
 /* the critical value. */
@@ -257,6 +261,10 @@ L50:
 /* start a new iteration */
 
     ++iter[1];
+    if (iter[1] > maxiter) {
+	*ierr = 3;
+	goto L999;
+    }
 
 /* calculate all constraints and check which are still violated */
 /* for the equality constraints we have to check whether the normal */

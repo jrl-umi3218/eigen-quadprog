@@ -73,6 +73,7 @@ c           ierr = 0, no problems
 c           ierr = 1, the minimization problem has no solution
 c           ierr = 2, problems with decomposing D, in this case sol
 c                     contains garbage!!
+c           ierr = 3, max iterations reached
 c
 c  Working space:
 c  work  vector with length at least 2*n+r*(r+5)/2 + 2*q +1
@@ -84,13 +85,14 @@ c
       integer n, i, j, l, l1, fdamat, fddmat,
      *     info, q, iact(*), iter(*), it1,
      *     ierr, nact, iwzv, iwrv, iwrm, iwsv, iwuv, nvl,
-     *     r, iwnbv, meq
+     *     r, iwnbv, meq, maxiter
       double precision dmat(fddmat,*), dvec(*),sol(*), bvec(*),
      *     work(*), temp, sum, t1, tt, gc, gs, crval,
      *     nu, amat(fdamat,*)
       logical t1inf, t2min
       r = min(n,q)
       l = 2*n + (r*(r+5))/2 + 2*q + 1
+      maxiter = max(50, 5 * (n + q))
 c 
 c store the initial dvec to calculate below the unconstrained minima of
 c the critical value.
@@ -177,6 +179,10 @@ c
 c start a new iteration      
 c
       iter(1) = iter(1)+1
+      if (iter(1) .GT. maxiter) then
+        ierr = 3
+        goto 999
+      endif
 c
 c calculate all constraints and check which are still violated
 c for the equality constraints we have to check whether the normal
