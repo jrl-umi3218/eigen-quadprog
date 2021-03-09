@@ -33,7 +33,7 @@ class EigenQuadProgConan(base.Eigen3ToPythonConan):
     def build_requirements(self):
         if self.settings.os == "Windows":
             self.build_requires("mingw_installer/latest@multi-contact/3rd-party")
-        else if self.settings.os == "Macos":
+        elif self.settings.os == "Macos":
             self.build_requires("gfortran/10.2@conan/stable")
 
     def system_requirements(self):
