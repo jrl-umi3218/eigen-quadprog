@@ -33,6 +33,8 @@ class EigenQuadProgConan(base.Eigen3ToPythonConan):
     def build_requirements(self):
         if self.settings.os == "Windows":
             self.build_requires("mingw_installer/latest@multi-contact/3rd-party")
+        else if self.settings.os == "Macos":
+            self.build_requires("gfortran/10.2@conan/stable")
 
     def system_requirements(self):
         installer = SystemPackageTool()
@@ -48,12 +50,6 @@ class EigenQuadProgConan(base.Eigen3ToPythonConan):
                         installer.install("libgfortran-{}-dev".format(versionfloat))
                     else:
                         installer.install("libgfortran-{}-dev".format(int(versionfloat.major)))
-        if tools.os_info.is_macos and Version(self.settings.compiler.version.value) > "7.3":
-            try:
-                installer.install("gcc", update=True, force=True)
-            except Exception:
-                self.output.warn("brew install gcc failed. Tying to fix it with 'brew link'")
-                self.run("brew link --overwrite gcc")
 
     def package_id(self):
         pass
