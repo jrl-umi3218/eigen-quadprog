@@ -18,7 +18,7 @@
 // includes
 // Eigen
 #include <Eigen/Core>
-#include <Eigen/Sparse>
+#include <Eigen/SparseCore>
 
 // eigen-quadprog
 #include "eigen_quadprog_api.h"
