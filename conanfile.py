@@ -34,7 +34,7 @@ class EigenQuadProgConan(base.Eigen3ToPythonConan):
         if self.settings.os == "Windows":
             self.build_requires("mingw_installer/latest@multi-contact/3rd-party")
         elif self.settings.os == "Macos":
-            self.build_requires("gfortran/10.2@conan/stable")
+            self.build_requires("gfortran/10.2")
 
     def system_requirements(self):
         installer = SystemPackageTool()
