@@ -10,7 +10,7 @@ base = python_requires("Eigen3ToPython/latest@multi-contact/dev")
 
 class EigenQuadProgConan(base.Eigen3ToPythonConan):
     name = "eigen-quadprog"
-    version = "1.1.0"
+    version = "1.1.1"
     description = "QuadProg QP solver through Eigen3 library"
     topics = ("robotics", "optimization", "qp", "python")
     url = "https://github.com/jrl-umi3218/eigen-quadprog"
