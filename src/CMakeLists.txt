@@ -63,7 +63,14 @@ endif()
 endif()
 
 if(${USE_F2C})
-  target_link_libraries(${PROJECT_NAME} PUBLIC libf2c.a)
+  include(find_eigen_quadprog_f2c.cmake)
+  find_eigen_quadprog_f2c()
+  target_link_libraries(${PROJECT_NAME} PUBLIC eigen-quadprog::f2c)
+  set(PACKAGE_EXTRA_MACROS "${PACKAGE_EXTRA_MACROS}
+  include(\"\${CMAKE_CURRENT_LIST_DIR}/find_eigen_quadprog_f2c.cmake\")
+  find_eigen_quadprog_f2c()
+  " PARENT_SCOPE)
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/find_eigen_quadprog_f2c.cmake" DESTINATION "${CONFIG_INSTALL_DIR}")
 endif()
 
 install(
