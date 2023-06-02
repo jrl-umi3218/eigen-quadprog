@@ -3,7 +3,7 @@
   <compound kind="file">
     <name>eigen_quadprog_api.h</name>
     <path>/home/runner/work/eigen-quadprog/eigen-quadprog/src/</path>
-    <filename>eigen__quadprog__api_8h</filename>
+    <filename>eigen__quadprog__api_8h.html</filename>
     <member kind="define">
       <type>#define</type>
       <name>EIGEN_QUADPROG_DLLIMPORT</name>
@@ -29,7 +29,7 @@
   <compound kind="file">
     <name>QuadProg.h</name>
     <path>/home/runner/work/eigen-quadprog/eigen-quadprog/src/</path>
-    <filename>QuadProg_8h</filename>
+    <filename>QuadProg_8h.html</filename>
     <includes id="eigen__quadprog__api_8h" name="eigen_quadprog_api.h" local="yes" imported="no">eigen_quadprog_api.h</includes>
     <class kind="class">Eigen::QuadProgCommon</class>
     <class kind="class">Eigen::QuadProgDense</class>
@@ -61,10 +61,10 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
-      <type>EIGEN_QUADPROG_API const VectorXi &amp;</type>
+      <type>const EIGEN_QUADPROG_API VectorXi &amp;</type>
       <name>iter</name>
       <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
-      <anchor>af451489e15582d42e990a046617adccf</anchor>
+      <anchor>a47e6434f6bbaa93bc17a5e9912b51777</anchor>
       <arglist>() const</arglist>
     </member>
     <member kind="function">
@@ -75,10 +75,10 @@
       <arglist>() const</arglist>
     </member>
     <member kind="function">
-      <type>EIGEN_QUADPROG_API const VectorXd &amp;</type>
+      <type>const EIGEN_QUADPROG_API VectorXd &amp;</type>
       <name>result</name>
       <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
-      <anchor>a1f9c37ae16afaa7cac4c7e6d7217440e</anchor>
+      <anchor>a48ad3eec4f3aa486c8b915bca5ff4a23</anchor>
       <arglist>() const</arglist>
     </member>
     <member kind="function">
