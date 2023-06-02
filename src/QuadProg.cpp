@@ -19,247 +19,208 @@
 namespace Eigen
 {
 
-
 /**
-	*												QuadProgCommon
-	*/
+ *												QuadProgCommon
+ */
 
+QuadProgCommon::QuadProgCommon() : Q_(), C_(), B_(), X_(), fail_(0), iact_(), iter_(2), tol_(0.0), maxiter_(0) {}
 
-QuadProgCommon::QuadProgCommon():
-	Q_(),
-	C_(),
-	B_(),
-	X_(),
-	fail_(0),
-	iact_(),
-	iter_(2),
-	tol_(0.0),
-	maxiter_(0)
+const VectorXi & QuadProgCommon::iter() const
 {
+  return iter_;
 }
-
-
-const VectorXi& QuadProgCommon::iter() const
-{
-	return iter_;
-}
-
 
 int QuadProgCommon::fail() const
 {
-	return fail_;
+  return fail_;
 }
 
 int QuadProgCommon::maxiter() const
 {
-	return maxiter_;
+  return maxiter_;
 }
 
 void QuadProgCommon::maxiter(int maxiter)
 {
-	if(maxiter < 0)
-	{
-		throw std::domain_error("Maximum iteration count must be >= 0");
-	}
-	maxiter_ = maxiter;
+  if(maxiter < 0) { throw std::domain_error("Maximum iteration count must be >= 0"); }
+  maxiter_ = maxiter;
 }
 
 double QuadProgCommon::tolerance() const
 {
-	return tol_;
+  return tol_;
 }
 
 void QuadProgCommon::tolerance(double tol)
 {
-	if(tol < 0.0)
-	{
-		tolerance(-tol);
-		return;
-	}
-	tol_ = tol;
+  if(tol < 0.0)
+  {
+    tolerance(-tol);
+    return;
+  }
+  tol_ = tol;
 }
 
-const VectorXd& QuadProgCommon::result() const
+const VectorXd & QuadProgCommon::result() const
 {
-	return X_;
+  return X_;
 }
-
 
 void QuadProgCommon::problem(int nrvar, int nreq, int nrineq)
 {
-	int nrconstr = nreq + nrineq;
+  int nrconstr = nreq + nrineq;
 
-	Q_.resize(nrvar, nrvar);
+  Q_.resize(nrvar, nrvar);
 
-	C_.resize(nrvar);
-	B_.resize(nrconstr);
-	X_.resize(nrvar);
+  C_.resize(nrvar);
+  B_.resize(nrconstr);
+  X_.resize(nrvar);
 
-	iact_.resize(nrconstr);
+  iact_.resize(nrconstr);
 
-	// compute work size, see fortran file to understand
-	int r = std::min(nrvar, nrconstr);
-	int lwork = static_cast<int>(
-		std::ceil(2.*nrvar + r*(r + 5.)/2. + 2.*nrconstr + 1.));
-	work_.resize(lwork);
+  // compute work size, see fortran file to understand
+  int r = std::min(nrvar, nrconstr);
+  int lwork = static_cast<int>(std::ceil(2. * nrvar + r * (r + 5.) / 2. + 2. * nrconstr + 1.));
+  work_.resize(lwork);
 }
 
-
-void QuadProgCommon::fillQCBf(int nreq, int nrineq,
-	const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
-	const Ref<const VectorXd>& Beq, const Ref<const VectorXd>& Bineq,
-	bool isDecomp)
+void QuadProgCommon::fillQCBf(int nreq,
+                              int nrineq,
+                              const Ref<const MatrixXd> & Q,
+                              const Ref<const VectorXd> & C,
+                              const Ref<const VectorXd> & Beq,
+                              const Ref<const VectorXd> & Bineq,
+                              bool isDecomp)
 {
-	Q_ = Q;
-	C_ = -C;
+  Q_ = Q;
+  C_ = -C;
 
-	B_.segment(0, nreq) = Beq;
-	B_.segment(nreq, nrineq) = -Bineq;
+  B_.segment(0, nreq) = Beq;
+  B_.segment(nreq, nrineq) = -Bineq;
 
-	fail_ = isDecomp ? 1 : 0;
+  fail_ = isDecomp ? 1 : 0;
 }
-
 
 /**
-	*												QuadProgDense
-	*/
+ *												QuadProgDense
+ */
 
+QuadProgDense::QuadProgDense() : A_() {}
 
-QuadProgDense::QuadProgDense():
-	A_()
-{ }
-
-
-QuadProgDense::QuadProgDense(int nrvar, int nreq, int nrineq):
-	A_()
-{
-	problem(nrvar, nreq, nrineq);
-}
-
-
-void QuadProgDense::problem(int nrvar, int nreq, int nrineq)
-{
-	QuadProgCommon::problem(nrvar, nreq, nrineq);
-	int nrconstr = nreq + nrineq;
-
-	A_.resize(nrvar, nrconstr);
-}
-
-
-bool QuadProgDense::solve(const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
-	const Ref<const MatrixXd>& Aeq, const Ref<const VectorXd>& Beq,
-	const Ref<const MatrixXd>& Aineq, const Ref<const VectorXd>& Bineq,
-	bool isDecomp)
-{
-	int nrvar = static_cast<int>(C.rows());
-	int nreq = static_cast<int>(Beq.rows());
-	int nrineq = static_cast<int>(Bineq.rows());
-
-	int fddmat = static_cast<int>(Q_.rows());
-	int n = nrvar;
-	double crval;
-	int fdamat = static_cast<int>(A_.rows());
-	int q = nreq + nrineq;
-	int meq = nreq;
-	int nact;
-
-	fillQCBf(nreq, nrineq, Q, C, Beq, Bineq, isDecomp);
-
-	if(nreq != 0)
-	{
-		A_.block(0, 0, nrvar, nreq) = Aeq.transpose();
-	}
-	if(nrineq != 0)
-	{
-		A_.block(0, nreq, nrvar, nrineq) = -Aineq.transpose();
-	}
-
-	qpgen2_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval,
-		A_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(), &nact,
-		iter_.data(), work_.data(), &fail_, &tol_, &maxiter_);
-
-	return fail_ == 0;
-}
-
-
-/**
-	*												QuadProgSparse
-	*/
-
-
-QuadProgSparse::QuadProgSparse():
-  A_(),
-  iA_()
-{ }
-
-
-QuadProgSparse::QuadProgSparse(int nrvar, int nreq, int nrineq):
-  A_(),
-  iA_()
+QuadProgDense::QuadProgDense(int nrvar, int nreq, int nrineq) : A_()
 {
   problem(nrvar, nreq, nrineq);
 }
 
+void QuadProgDense::problem(int nrvar, int nreq, int nrineq)
+{
+  QuadProgCommon::problem(nrvar, nreq, nrineq);
+  int nrconstr = nreq + nrineq;
+
+  A_.resize(nrvar, nrconstr);
+}
+
+bool QuadProgDense::solve(const Ref<const MatrixXd> & Q,
+                          const Ref<const VectorXd> & C,
+                          const Ref<const MatrixXd> & Aeq,
+                          const Ref<const VectorXd> & Beq,
+                          const Ref<const MatrixXd> & Aineq,
+                          const Ref<const VectorXd> & Bineq,
+                          bool isDecomp)
+{
+  int nrvar = static_cast<int>(C.rows());
+  int nreq = static_cast<int>(Beq.rows());
+  int nrineq = static_cast<int>(Bineq.rows());
+
+  int fddmat = static_cast<int>(Q_.rows());
+  int n = nrvar;
+  double crval;
+  int fdamat = static_cast<int>(A_.rows());
+  int q = nreq + nrineq;
+  int meq = nreq;
+  int nact;
+
+  fillQCBf(nreq, nrineq, Q, C, Beq, Bineq, isDecomp);
+
+  if(nreq != 0) { A_.block(0, 0, nrvar, nreq) = Aeq.transpose(); }
+  if(nrineq != 0) { A_.block(0, nreq, nrvar, nrineq) = -Aineq.transpose(); }
+
+  qpgen2_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval, A_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(),
+          &nact, iter_.data(), work_.data(), &fail_, &tol_, &maxiter_);
+
+  return fail_ == 0;
+}
+
+/**
+ *												QuadProgSparse
+ */
+
+QuadProgSparse::QuadProgSparse() : A_(), iA_() {}
+
+QuadProgSparse::QuadProgSparse(int nrvar, int nreq, int nrineq) : A_(), iA_()
+{
+  problem(nrvar, nreq, nrineq);
+}
 
 void QuadProgSparse::problem(int nrvar, int nreq, int nrineq)
 {
-	QuadProgCommon::problem(nrvar, nreq, nrineq);
-	int nrconstr = nreq + nrineq;
+  QuadProgCommon::problem(nrvar, nreq, nrineq);
+  int nrconstr = nreq + nrineq;
 
-	A_.resize(nrvar, nrconstr);
-	iA_.resize(nrvar + 1, nrconstr);
+  A_.resize(nrvar, nrconstr);
+  iA_.resize(nrvar + 1, nrconstr);
 }
 
-
-bool QuadProgSparse::solve(const Ref<const MatrixXd>& Q, const Ref<const VectorXd>& C,
-	const SparseMatrix<double>& Aeq, const Ref<const VectorXd>& Beq,
-	const SparseMatrix<double>& Aineq, const Ref<const VectorXd>& Bineq,
-	bool isDecomp)
+bool QuadProgSparse::solve(const Ref<const MatrixXd> & Q,
+                           const Ref<const VectorXd> & C,
+                           const SparseMatrix<double> & Aeq,
+                           const Ref<const VectorXd> & Beq,
+                           const SparseMatrix<double> & Aineq,
+                           const Ref<const VectorXd> & Bineq,
+                           bool isDecomp)
 {
-	int nrvar = static_cast<int>(C.rows());
-	int nreq = static_cast<int>(Beq.rows());
-	int nrineq = static_cast<int>(Bineq.rows());
+  int nrvar = static_cast<int>(C.rows());
+  int nreq = static_cast<int>(Beq.rows());
+  int nrineq = static_cast<int>(Bineq.rows());
 
-	int fddmat = static_cast<int>(Q_.rows());
-	int n = nrvar;
-	double crval;
-	int fdamat = static_cast<int>(A_.rows());
-	int q = nreq + nrineq;
-	int meq = nreq;
-	int nact;
+  int fddmat = static_cast<int>(Q_.rows());
+  int n = nrvar;
+  double crval;
+  int fdamat = static_cast<int>(A_.rows());
+  int q = nreq + nrineq;
+  int meq = nreq;
+  int nact;
 
-	fillQCBf(nreq, nrineq, Q, C, Beq, Bineq, isDecomp);
+  fillQCBf(nreq, nrineq, Q, C, Beq, Bineq, isDecomp);
 
-	iA_.row(0).setZero();
+  iA_.row(0).setZero();
 
-	// in A{eq,ineq} row is the constraint index, col is the variable index
-	// so row its A_ col and col is A_ row.
-	for(int k = 0; k < Aeq.outerSize(); ++k)
-	{
-		for(SparseMatrix<double>::InnerIterator it(Aeq, k); it; ++it)
-		{
-			int nrValCi = iA_(0, it.row()) += 1;
-			iA_(nrValCi, it.row()) = it.col() + 1;
-			A_(nrValCi - 1, it.row()) = it.value();
-		}
-	}
+  // in A{eq,ineq} row is the constraint index, col is the variable index
+  // so row its A_ col and col is A_ row.
+  for(int k = 0; k < Aeq.outerSize(); ++k)
+  {
+    for(SparseMatrix<double>::InnerIterator it(Aeq, k); it; ++it)
+    {
+      int nrValCi = iA_(0, it.row()) += 1;
+      iA_(nrValCi, it.row()) = it.col() + 1;
+      A_(nrValCi - 1, it.row()) = it.value();
+    }
+  }
 
-	for(int k = 0; k < Aineq.outerSize(); ++k)
-	{
-		for(SparseMatrix<double>::InnerIterator it(Aineq, k); it; ++it)
-		{
-			int nrValCi = iA_(0, it.row() + nreq) += 1;
-			iA_(nrValCi, it.row() + nreq) = it.col() + 1;
-			A_(nrValCi - 1, it.row() + nreq) = -it.value();
-		}
-	}
+  for(int k = 0; k < Aineq.outerSize(); ++k)
+  {
+    for(SparseMatrix<double>::InnerIterator it(Aineq, k); it; ++it)
+    {
+      int nrValCi = iA_(0, it.row() + nreq) += 1;
+      iA_(nrValCi, it.row() + nreq) = it.col() + 1;
+      A_(nrValCi - 1, it.row() + nreq) = -it.value();
+    }
+  }
 
-	qpgen1_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval,
-		A_.data(), iA_.data(), B_.data(), &fdamat, &q, &meq, iact_.data(), &nact,
-		iter_.data(), work_.data(), &fail_, &tol_, &maxiter_);
+  qpgen1_(Q_.data(), C_.data(), &fddmat, &n, X_.data(), &crval, A_.data(), iA_.data(), B_.data(), &fdamat, &q, &meq,
+          iact_.data(), &nact, iter_.data(), work_.data(), &fail_, &tol_, &maxiter_);
 
-	return fail_ == 0;
+  return fail_ == 0;
 }
-
 
 } // namespace Eigen

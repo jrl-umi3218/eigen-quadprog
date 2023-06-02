@@ -21,21 +21,17 @@ struct QP1
     XU.resize(nrvar);
     X.resize(nrvar);
 
-
-    Aeq << 1., -1., 1., 0., 3., 1.,
-           -1., 0., -3., -4., 5., 6.,
-           2., 5., 3., 0., 1., 0.;
+    Aeq << 1., -1., 1., 0., 3., 1., -1., 0., -3., -4., 5., 6., 2., 5., 3., 0., 1., 0.;
     Beq << 1., 2., 3.;
 
-    Aineq << 0., 1., 0., 1., 2., -1.,
-             -1., 0., 2., 1., 1., 0.;
+    Aineq << 0., 1., 0., 1., 2., -1., -1., 0., 2., 1., 1., 0.;
     Bineq << -1., 2.5;
 
-    //with  x between ci and cs:
-    XL << -1000., -10000., 0., -1000., -1000.,-1000.;
+    // with  x between ci and cs:
+    XL << -1000., -10000., 0., -1000., -1000., -1000.;
     XU << 10000., 100., 1.5, 100., 100., 1000.;
 
-    //and minimize 0.5*x'*Q*x + p'*x with
+    // and minimize 0.5*x'*Q*x + p'*x with
     C << 1., 2., 3., 4., 5., 6.;
     Q.setIdentity();
 
@@ -47,23 +43,22 @@ struct QP1
   Eigen::VectorXd C, Beq, Bineq, XL, XU, X;
 };
 
-void ineqWithXBounds(Eigen::MatrixXd& Aineq, Eigen::VectorXd& Bineq,
-  const Eigen::VectorXd& XL, const Eigen::VectorXd& XU)
+void ineqWithXBounds(Eigen::MatrixXd & Aineq,
+                     Eigen::VectorXd & Bineq,
+                     const Eigen::VectorXd & XL,
+                     const Eigen::VectorXd & XU)
 {
   double inf = std::numeric_limits<double>::infinity();
 
-  std::vector<std::pair<int, double> > lbounds, ubounds;
+  std::vector<std::pair<int, double>> lbounds, ubounds;
 
   for(int i = 0; i < XL.rows(); ++i)
   {
-    if(XL[i] != -inf)
-      lbounds.emplace_back(i, XL[i]);
-    if(XU[i] != inf)
-      ubounds.emplace_back(i, XU[i]);
+    if(XL[i] != -inf) lbounds.emplace_back(i, XL[i]);
+    if(XU[i] != inf) ubounds.emplace_back(i, XU[i]);
   }
 
-  long int nrconstr = Bineq.rows() + static_cast<long int>(lbounds.size()) +
-    static_cast<long int>(ubounds.size());
+  long int nrconstr = Bineq.rows() + static_cast<long int>(lbounds.size()) + static_cast<long int>(ubounds.size());
 
   Eigen::MatrixXd A(Eigen::MatrixXd::Zero(nrconstr, Aineq.cols()));
   Eigen::VectorXd B(Eigen::VectorXd::Zero(nrconstr));
@@ -75,7 +70,7 @@ void ineqWithXBounds(Eigen::MatrixXd& Aineq, Eigen::VectorXd& Bineq,
 
   for(int i = 0; i < static_cast<int>(lbounds.size()); ++i)
   {
-    const auto& b = lbounds[i];
+    const auto & b = lbounds[i];
     A(start, b.first) = -1.;
     B(start) = -b.second;
     ++start;
@@ -83,7 +78,7 @@ void ineqWithXBounds(Eigen::MatrixXd& Aineq, Eigen::VectorXd& Bineq,
 
   for(int i = 0; i < static_cast<int>(ubounds.size()); ++i)
   {
-    const auto& b = ubounds[i];
+    const auto & b = ubounds[i];
     A(start, b.first) = 1.;
     B(start) = b.second;
     ++start;
