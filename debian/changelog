@@ -1,3 +1,9 @@
+eigen-quadprog (1.1.2-1debian1) unstable; urgency=medium
+
+  * Update upstream version
+
+ -- Pierre Gergondet <pierre.gergondet+ppa@gmail.com>  Tue, 13 Jun 2023 13:03:03 +0900
+
 eigen-quadprog (1.1.1-1ubuntu1) unstable; urgency=medium
 
   * Update upstream version
