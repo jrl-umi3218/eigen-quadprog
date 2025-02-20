@@ -1,7 +1,8 @@
 project(quadprog_fortran Fortran)
 
 set(QUAD_FORT ../QuadProg/f/solve.QP.f ../QuadProg/f/solve.QP.compact.f
-              ../QuadProg/f/util.f)
+              ../QuadProg/f/util.f
+)
 
 set(BLAS_FORT ../BLAS/f/blas.f)
 
