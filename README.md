@@ -9,7 +9,7 @@ eigen-quadprog allow to use the QuadProg QP solver with the Eigen3 library.
 
 ## Installing
 
-### Ubuntu LTS (16.04, 18.04, 20.04)
+### Ubuntu LTS (16.04, 18.04, 20.04, 22.04, 24.04)
 
 You must first setup our package mirror:
 
