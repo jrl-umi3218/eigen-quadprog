@@ -23,9 +23,9 @@ if(WIN32)
 else()
   set(USE_FORTRAN_SUBDIRECTORY_DEFAULT OFF)
 endif()
-option(USE_FORTRAN_SUBDIRECTORY "Use cmake to generate sub project for fortran parts"
-       ${USE_FORTRAN_SUBDIRECTORY_DEFAULT}
-)
+option(USE_FORTRAN_SUBDIRECTORY
+       "Use cmake to generate sub project for fortran parts"
+       ${USE_FORTRAN_SUBDIRECTORY_DEFAULT})
 option(DISABLE_TESTS "Disable unit tests." OFF)
 
 find_package(Eigen3 QUIET NO_CMAKE_PACKAGE_REGISTRY)
@@ -45,7 +45,7 @@ if(MSVC)
   endif()
 endif(MSVC)
 
-# ######################################################################################
+# ##############################################################################
 
 add_subdirectory(src)
 
