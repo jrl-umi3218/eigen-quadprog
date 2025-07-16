@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<tagfile>
+<tagfile doxygen_version="1.9.1">
   <compound kind="file">
     <name>eigen_quadprog_api.h</name>
     <path>/home/runner/work/eigen-quadprog/eigen-quadprog/src/</path>
@@ -61,10 +61,10 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
-      <type>const EIGEN_QUADPROG_API VectorXi &amp;</type>
+      <type>EIGEN_QUADPROG_API const VectorXi &amp;</type>
       <name>iter</name>
       <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
-      <anchor>a47e6434f6bbaa93bc17a5e9912b51777</anchor>
+      <anchor>af451489e15582d42e990a046617adccf</anchor>
       <arglist>() const</arglist>
     </member>
     <member kind="function">
@@ -75,10 +75,10 @@
       <arglist>() const</arglist>
     </member>
     <member kind="function">
-      <type>const EIGEN_QUADPROG_API VectorXd &amp;</type>
+      <type>EIGEN_QUADPROG_API const VectorXd &amp;</type>
       <name>result</name>
       <anchorfile>classEigen_1_1QuadProgCommon.html</anchorfile>
-      <anchor>a48ad3eec4f3aa486c8b915bca5ff4a23</anchor>
+      <anchor>a1f9c37ae16afaa7cac4c7e6d7217440e</anchor>
       <arglist>() const</arglist>
     </member>
     <member kind="function">
