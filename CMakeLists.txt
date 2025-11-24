@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CXX_DISABLE_WERROR True) # disable -Werror on Unix for now.
@@ -7,7 +7,7 @@ set(PROJECT_NAME eigen-quadprog)
 set(PROJECT_DESCRIPTION "QuadProg QP solver through Eigen3 library.")
 set(PROJECT_URL "https://github.com/jrl-umi3218/eigen-quadprog")
 set(PROJECT_DEBUG_POSTFIX "_d")
-set(PROJECT_VERSION 1.1.3)
+set(PROJECT_VERSION 1.1.4)
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
 set(DOXYGEN_USE_MATHJAX "YES")
