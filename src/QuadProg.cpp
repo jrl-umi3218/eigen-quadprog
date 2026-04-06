@@ -26,19 +26,13 @@ namespace Eigen
 QuadProgCommon::QuadProgCommon() : Q_(), C_(), B_(), X_(), fail_(0), iact_(), iter_(2), tol_(0.0), maxiter_(0) {}
 
 const VectorXi & QuadProgCommon::iter() const
-{
-  return iter_;
-}
+{ return iter_; }
 
 int QuadProgCommon::fail() const
-{
-  return fail_;
-}
+{ return fail_; }
 
 int QuadProgCommon::maxiter() const
-{
-  return maxiter_;
-}
+{ return maxiter_; }
 
 void QuadProgCommon::maxiter(int maxiter)
 {
@@ -47,9 +41,7 @@ void QuadProgCommon::maxiter(int maxiter)
 }
 
 double QuadProgCommon::tolerance() const
-{
-  return tol_;
-}
+{ return tol_; }
 
 void QuadProgCommon::tolerance(double tol)
 {
@@ -62,9 +54,7 @@ void QuadProgCommon::tolerance(double tol)
 }
 
 const VectorXd & QuadProgCommon::result() const
-{
-  return X_;
-}
+{ return X_; }
 
 void QuadProgCommon::problem(int nrvar, int nreq, int nrineq)
 {
@@ -108,9 +98,7 @@ void QuadProgCommon::fillQCBf(int nreq,
 QuadProgDense::QuadProgDense() : A_() {}
 
 QuadProgDense::QuadProgDense(int nrvar, int nreq, int nrineq) : A_()
-{
-  problem(nrvar, nreq, nrineq);
-}
+{ problem(nrvar, nreq, nrineq); }
 
 void QuadProgDense::problem(int nrvar, int nreq, int nrineq)
 {
@@ -158,9 +146,7 @@ bool QuadProgDense::solve(const Ref<const MatrixXd> & Q,
 QuadProgSparse::QuadProgSparse() : A_(), iA_() {}
 
 QuadProgSparse::QuadProgSparse(int nrvar, int nreq, int nrineq) : A_(), iA_()
-{
-  problem(nrvar, nreq, nrineq);
-}
+{ problem(nrvar, nreq, nrineq); }
 
 void QuadProgSparse::problem(int nrvar, int nreq, int nrineq)
 {
