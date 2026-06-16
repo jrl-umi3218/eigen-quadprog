@@ -39,8 +39,8 @@ jobs:
           brew: eigen boost gcc
         windows: |
           github:
-            - path: eigenteam/eigen-git-mirror
-              ref: 3.3.7
+            - path: eigen-mirror/eigen
+              ref: 3.4.1
     - name: Build and test
       uses: jrl-umi3218/github-actions/build-cmake-project@master
       with:
