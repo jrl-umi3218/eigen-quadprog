@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.22)
+
 project(quadprog_fortran Fortran)
 
 set(QUAD_FORT ../QuadProg/f/solve.QP.f ../QuadProg/f/solve.QP.compact.f
